@@ -26,7 +26,7 @@ import commands.AddCommand;   // Client creates receiver
   invoker.setCommand(addCmd);
   ```
 
-### 2. **Invoker**
+### 2. **invoker.Invoker**
 - **Role**: Asks the command to carry out the request
 - **Responsibilities**:
   - Stores reference to command object
@@ -69,14 +69,14 @@ import commands.AddCommand;   // Client creates receiver
   ```
 
 ### 4. **ConcreteCommand**
-- **Role**: Implements the commands.Command interface and defines the binding between Receiver and action
+- **Role**: Implements the commands.Command interface and defines the binding between data.Receiver and action
 - **Responsibilities**:
   - Stores reference to receiver object
   - Stores parameters needed for the operation
   - Implements `execute()` by calling methods on receiver
   - Implements `undo()` if applicable
   - **Does NOT perform the work itself** - delegates to receiver
-- **In Your Assignment**: `commands.AddCommand`, `UpdateCommand`, `DeleteCommand`, `ListCommand`, `UndoCommand`
+- **In Your Assignment**: `commands.AddCommand`, `commands.UpdateCommand`, `commands.DeleteCommand`, `commands.ListCommand`, `commands.UndoCommand`
 - **Structure**:
   ```java
   public class commands.AddCommand implements commands.Command {
@@ -96,7 +96,7 @@ import commands.AddCommand;   // Client creates receiver
   }
   ```
 
-### 5. **Receiver**
+### 5. **data.Receiver**
 - **Role**: Contains business logic and knows how to perform operations
 - **Responsibilities**:
   - Performs the actual work when command calls its methods
@@ -111,7 +111,7 @@ import commands.AddCommand;   // Client creates receiver
   - Performs validation and error handling
 - **Example**:
   ```java
-  public class DataStore {  // This is the Receiver
+  public class DataStore {  // This is the data.Receiver
       private ArrayList<Employee> employees;
       
       public void addEmployee(String firstName, String lastName, String email) {
@@ -126,17 +126,17 @@ import commands.AddCommand;   // Client creates receiver
 ## Interaction Flow
 
 ```
-1. Client creates Receiver
+1. Client creates data.Receiver
    ↓
-2. Client creates ConcreteCommand with Receiver reference
+2. Client creates ConcreteCommand with data.Receiver reference
    ↓
-3. Client gives ConcreteCommand to Invoker
+3. Client gives ConcreteCommand to invoker.Invoker
    ↓
-4. Invoker calls command.execute()
+4. invoker.Invoker calls command.execute()
    ↓
 5. ConcreteCommand calls receiver.performAction()
    ↓
-6. Receiver performs the actual work
+6. data.Receiver performs the actual work
 ```
 
 ## Key Relationships
@@ -146,15 +146,15 @@ import commands.AddCommand;   // Client creates receiver
 - Passes all necessary parameters
 - Associates commands with invoker
 
-### **ConcreteCommand → Receiver**
+### **ConcreteCommand → data.Receiver**
 - commands.Command stores reference to receiver
 - commands.Command delegates work to receiver
 - commands.Command doesn't do the work itself
 
-### **Invoker → commands.Command**
-- Invoker only knows the commands.Command interface
-- Invoker triggers execution via `execute()`
-- Invoker may store commands for history/undo
+### **invoker.Invoker → commands.Command**
+- invoker.Invoker only knows the commands.Command interface
+- invoker.Invoker triggers execution via `execute()`
+- invoker.Invoker may store commands for history/undo
 
 ### **commands.Command → ConcreteCommand**
 - Interface defines the contract
@@ -164,7 +164,7 @@ import commands.AddCommand;   // Client creates receiver
 ## Benefits of This Structure
 
 ### **Decoupling**
-- Invoker doesn't know about receivers
+- invoker.Invoker doesn't know about receivers
 - Commands encapsulate all request information
 - Easy to add new commands without changing existing code
 
@@ -183,10 +183,10 @@ import commands.AddCommand;   // Client creates receiver
 Think of a **restaurant ordering system**:
 
 - **Client**: Customer who places an order
-- **Invoker**: Waiter who takes the order to the kitchen
+- **invoker.Invoker**: Waiter who takes the order to the kitchen
 - **commands.Command**: Written order slip with all details
 - **ConcreteCommand**: Specific orders like "Burger Order", "Pizza Order"
-- **Receiver**: Kitchen staff who prepare the food
+- **data.Receiver**: Kitchen staff who prepare the food
 
 The waiter (invoker) doesn't need to know how to cook - they just pass the order (command) to the kitchen (receiver) who knows how to prepare the food.
 
@@ -195,9 +195,9 @@ The waiter (invoker) doesn't need to know how to cook - they just pass the order
 | Pattern Component | Your Implementation |
 |------------------|-------------------|
 | **Client** | `Main` class (handles user input) |
-| **Invoker** | `CommandInvoker` class (manages execution & history) |
+| **invoker.Invoker** | `CommandInvoker` class (manages execution & history) |
 | **commands.Command** | `commands.Command` interface |
-| **ConcreteCommand** | `commands.AddCommand`, `UpdateCommand`, `DeleteCommand`, `ListCommand`, `UndoCommand` |
-| **Receiver** | `DataStore` class (contains business logic) |
+| **ConcreteCommand** | `commands.AddCommand`, `commands.UpdateCommand`, `commands.DeleteCommand`, `commands.ListCommand`, `commands.UndoCommand` |
+| **data.Receiver** | `DataStore` class (contains business logic) |
 
 This structure ensures that your tool is flexible, maintainable, and follows object-oriented design principles while supporting the required undo functionality.
