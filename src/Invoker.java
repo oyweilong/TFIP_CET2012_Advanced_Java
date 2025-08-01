@@ -6,6 +6,7 @@ public class Invoker {
     private Command[] cmdToExecute;
 
     public void setCommandsForExecution(Command[] cmdToExecute){
+        this.cmdToExecute = cmdToExecute;
     }
 
     public void executeCommand(Stack<Command> history){}
