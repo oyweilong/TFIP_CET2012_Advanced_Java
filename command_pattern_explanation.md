@@ -15,7 +15,7 @@ The Command Design Pattern encapsulates a request as an object, thereby allowing
 - **In Your Assignment**: The `Main` class with user input handling
 - **Example**:
   ```java
-  // Client creates receiver
+import commands.AddCommand;   // Client creates receiver
   DataStore dataStore = new DataStore();
   
   // Client creates concrete command with receiver
@@ -76,14 +76,14 @@ The Command Design Pattern encapsulates a request as an object, thereby allowing
   - Implements `execute()` by calling methods on receiver
   - Implements `undo()` if applicable
   - **Does NOT perform the work itself** - delegates to receiver
-- **In Your Assignment**: `AddCommand`, `UpdateCommand`, `DeleteCommand`, `ListCommand`, `UndoCommand`
+- **In Your Assignment**: `commands.AddCommand`, `UpdateCommand`, `DeleteCommand`, `ListCommand`, `UndoCommand`
 - **Structure**:
   ```java
-  public class AddCommand implements Command {
+  public class commands.AddCommand implements Command {
       private DataStore receiver;  // Reference to receiver
       private String firstName, lastName, email;  // Parameters
       
-      public AddCommand(DataStore receiver, String firstName, String lastName, String email) {
+      public commands.AddCommand(DataStore receiver, String firstName, String lastName, String email) {
           this.receiver = receiver;
           this.firstName = firstName;
           this.lastName = lastName;
@@ -197,7 +197,7 @@ The waiter (invoker) doesn't need to know how to cook - they just pass the order
 | **Client** | `Main` class (handles user input) |
 | **Invoker** | `CommandInvoker` class (manages execution & history) |
 | **Command** | `Command` interface |
-| **ConcreteCommand** | `AddCommand`, `UpdateCommand`, `DeleteCommand`, `ListCommand`, `UndoCommand` |
+| **ConcreteCommand** | `commands.AddCommand`, `UpdateCommand`, `DeleteCommand`, `ListCommand`, `UndoCommand` |
 | **Receiver** | `DataStore` class (contains business logic) |
 
 This structure ensures that your tool is flexible, maintainable, and follows object-oriented design principles while supporting the required undo functionality.
