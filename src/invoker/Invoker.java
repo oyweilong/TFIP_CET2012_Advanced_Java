@@ -10,7 +10,6 @@ public class Invoker {
     public void setCommandsForExecution(Command[] cmdToExecute){
         this.cmdToExecute = cmdToExecute;
     }
-    // test test test
 
     public void executeCommand(Stack<Command> history){}
 }
