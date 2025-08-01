@@ -1,4 +1,4 @@
-import commands.Command;
+package commands;
 
 public class DeleteCommand implements Command {
 
