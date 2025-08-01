@@ -1,2 +1,4 @@
-public class UpdateCommand implements Command{
+import commands.Command;
+
+public class UpdateCommand implements Command {
 }

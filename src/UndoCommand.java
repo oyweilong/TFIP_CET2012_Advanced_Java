@@ -1,3 +1,5 @@
-public class UndoCommand implements Command{
+import commands.Command;
+
+public class UndoCommand implements Command {
 
 }

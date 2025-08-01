@@ -1,7 +1,7 @@
-# Command Design Pattern Structure (Figure 1) Explanation
+# commands.Command Design Pattern Structure (Figure 1) Explanation
 
 ## Overview
-The Command Design Pattern encapsulates a request as an object, thereby allowing you to parameterize clients with different requests, queue operations, and support undo operations.
+The commands.Command Design Pattern encapsulates a request as an object, thereby allowing you to parameterize clients with different requests, queue operations, and support undo operations.
 
 ## Components Breakdown
 
@@ -35,15 +35,15 @@ import commands.AddCommand;   // Client creates receiver
   - May store commands for delayed execution or undo
 - **In Your Assignment**: `CommandInvoker` class that manages command history
 - **Key Features**:
-  - Has a field to store command reference: `Command command`
+  - Has a field to store command reference: `commands.Command command`
   - Method to execute: `command.execute()`
-  - Manages command history: `Stack<Command> history`
+  - Manages command history: `Stack<commands.Command> history`
 - **Example**:
   ```java
   public class CommandInvoker {
-      private Stack<Command> history = new Stack<>();
+      private Stack<commands.Command> history = new Stack<>();
       
-      public void executeCommand(Command command) {
+      public void executeCommand(commands.Command command) {
           command.execute();
           if (command.isUndoable()) {
               history.push(command);
@@ -52,16 +52,16 @@ import commands.AddCommand;   // Client creates receiver
   }
   ```
 
-### 3. **Command (Interface)**
+### 3. **commands.Command (Interface)**
 - **Role**: Declares interface for executing operations
 - **Responsibilities**:
   - Defines the contract that all concrete commands must follow
   - Usually declares just `execute()` method
   - May include `undo()` for reversible operations
-- **In Your Assignment**: The `Command` interface
+- **In Your Assignment**: The `commands.Command` interface
 - **Structure**:
   ```java
-  public interface Command {
+  public interface commands.Command {
       void execute() throws CustomException;
       void undo() throws CustomException;
       boolean isUndoable();
@@ -69,7 +69,7 @@ import commands.AddCommand;   // Client creates receiver
   ```
 
 ### 4. **ConcreteCommand**
-- **Role**: Implements the Command interface and defines the binding between Receiver and action
+- **Role**: Implements the commands.Command interface and defines the binding between Receiver and action
 - **Responsibilities**:
   - Stores reference to receiver object
   - Stores parameters needed for the operation
@@ -79,7 +79,7 @@ import commands.AddCommand;   // Client creates receiver
 - **In Your Assignment**: `commands.AddCommand`, `UpdateCommand`, `DeleteCommand`, `ListCommand`, `UndoCommand`
 - **Structure**:
   ```java
-  public class commands.AddCommand implements Command {
+  public class commands.AddCommand implements commands.Command {
       private DataStore receiver;  // Reference to receiver
       private String firstName, lastName, email;  // Parameters
       
@@ -147,16 +147,16 @@ import commands.AddCommand;   // Client creates receiver
 - Associates commands with invoker
 
 ### **ConcreteCommand → Receiver**
-- Command stores reference to receiver
-- Command delegates work to receiver
-- Command doesn't do the work itself
+- commands.Command stores reference to receiver
+- commands.Command delegates work to receiver
+- commands.Command doesn't do the work itself
 
-### **Invoker → Command**
-- Invoker only knows the Command interface
+### **Invoker → commands.Command**
+- Invoker only knows the commands.Command interface
 - Invoker triggers execution via `execute()`
 - Invoker may store commands for history/undo
 
-### **Command → ConcreteCommand**
+### **commands.Command → ConcreteCommand**
 - Interface defines the contract
 - All concrete commands implement this interface
 - Provides polymorphic behavior
@@ -184,7 +184,7 @@ Think of a **restaurant ordering system**:
 
 - **Client**: Customer who places an order
 - **Invoker**: Waiter who takes the order to the kitchen
-- **Command**: Written order slip with all details
+- **commands.Command**: Written order slip with all details
 - **ConcreteCommand**: Specific orders like "Burger Order", "Pizza Order"
 - **Receiver**: Kitchen staff who prepare the food
 
@@ -196,7 +196,7 @@ The waiter (invoker) doesn't need to know how to cook - they just pass the order
 |------------------|-------------------|
 | **Client** | `Main` class (handles user input) |
 | **Invoker** | `CommandInvoker` class (manages execution & history) |
-| **Command** | `Command` interface |
+| **commands.Command** | `commands.Command` interface |
 | **ConcreteCommand** | `commands.AddCommand`, `UpdateCommand`, `DeleteCommand`, `ListCommand`, `UndoCommand` |
 | **Receiver** | `DataStore` class (contains business logic) |
 
