@@ -10,7 +10,6 @@ public class Driver {
        Invoker invoker = new Invoker();
        Receiver r = new Receiver();
        Command[] cmd_arr = new Command[100];
-       int cmd_counter = 0;
        Stack<Command> history = new Stack<>();
 
 
