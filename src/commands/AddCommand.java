@@ -18,7 +18,7 @@ public class AddCommand implements Command {
 
     @Override
     public void execute(){
-        receiver.add(firstname, lastname, email);
+        receiver.addEmployee(firstname, lastname, email);
     }
 
 
