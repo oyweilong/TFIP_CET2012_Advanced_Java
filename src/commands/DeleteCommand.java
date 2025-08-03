@@ -11,8 +11,8 @@ public class DeleteCommand implements Command {
         this.index = index;
     }
     @Override
-    public void execute(){
-        receiver.deleteEntry(index);
+    public boolean execute(){
+        return (receiver.deleteEntry(index));
     }
 
 }

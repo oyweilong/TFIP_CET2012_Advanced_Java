@@ -11,10 +11,8 @@ public class Invoker {
     }
     public void executeCommand(Stack<Command> history){
         for(Command cmd : cmdToExecute){
-            if (cmd != null) {
-                cmd.execute();
-                history.push(cmd);
-            }
+                if (cmd.execute())
+                    history.push(cmd);
         }
     }
 }

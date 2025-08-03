@@ -3,6 +3,7 @@ package commands;
 public class UpdateCommand implements Command {
 
     @Override
-    public void execute(){
+    public boolean execute(){
+        return true;
     }
 }

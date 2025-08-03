@@ -1,45 +1,42 @@
 import commands.AddCommand;
 import commands.Command;
+import commands.DeleteCommand;
 import commands.ListCommand;
 import data.Receiver;
 
+import java.util.Stack;
+
 public class Entry {
-    private String firstname;
-    private String lastname;
-    private String email;
-    static Command[] cmd_arr= new Command[1];
+    static Command[] cmdArr= new Command[1];
     private static int cmdCount = 0;
+    static Stack<Command> history = new Stack<>();
 
-    public Entry(String firstname, String lastname, String email){
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-    }
-
-    public void add(Receiver r){
+    public static void add(Receiver r, String firstname, String lastname,
+                     String email){
         AddCommand add = new AddCommand(r, firstname, lastname, email );
-        try{
-            cmd_arr[cmdCount] = add;
-            cmdCount++;}
-        catch (ArrayIndexOutOfBoundsException e){
-            Command[] new_cmd_arr = new Command[cmd_arr.length+1];
-            System.arraycopy(cmd_arr, 0, new_cmd_arr, 0, cmd_arr.length);
-            cmd_arr = new_cmd_arr;
-            cmd_arr[cmdCount] = add;
-            cmdCount++;
-        }
+        addToCmdArr(add);
     }
 
+    public static void delete(Receiver r, int index){
+        DeleteCommand delete = new DeleteCommand(r, index);
+        addToCmdArr(delete);
+    }
     public static void list(Receiver r){
         ListCommand list = new ListCommand(r);
+        addToCmdArr(list);
+    }
+
+    private static void addToCmdArr(Command command){
+        //Try-catch block for dynamically increasing size of cmdArr when needed
         try{
-            cmd_arr[cmdCount] = list;
-            cmdCount++;}
+            cmdArr[cmdCount] = command;
+            cmdCount++;
+        }
         catch (ArrayIndexOutOfBoundsException e) {
-            Command[] new_cmd_arr = new Command[cmd_arr.length+1];
-            System.arraycopy(cmd_arr, 0, new_cmd_arr, 0, cmd_arr.length);
-            cmd_arr = new_cmd_arr;
-            cmd_arr[cmdCount] = list;
+            Command[] new_cmdArr = new Command[cmdArr.length+1];
+            System.arraycopy(cmdArr, 0, new_cmdArr, 0, cmdArr.length);
+            cmdArr = new_cmdArr;
+            cmdArr[cmdCount] = command;
             cmdCount++;
         }
     }

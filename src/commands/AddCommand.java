@@ -17,8 +17,8 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute(){
-        receiver.addEntry(firstname, lastname, email);
+    public boolean execute(){
+        return receiver.addEntry(firstname, lastname, email);
     }
 
 

@@ -8,8 +8,9 @@ public class ListCommand implements Command {
         this.receiver = receiver;
     }
     @Override
-    public void execute(){
+    public boolean execute(){
         receiver.list();
+        return false;
     }
 
 }
