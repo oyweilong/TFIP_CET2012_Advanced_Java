@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class AddCommand implements Command {
     private final Receiver receiver;
-    private final ArrayList<String> payload;
+    private final String[] payload;
 
 
     public AddCommand(Receiver receiver, String payload){

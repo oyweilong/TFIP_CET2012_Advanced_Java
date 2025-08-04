@@ -21,55 +21,52 @@ import java.util.List;
 // successfully (before file IO stage)
 
 public class Receiver {
-    public ArrayList<List<String>> tempDatastore = new ArrayList<>();
+    public ArrayList<String[]> tempDatastore = new ArrayList<>();
 
     private void setListHeader(){
         if (tempDatastore.isEmpty()){
-            List<String> header = new ArrayList<>();
-            header.add("First_Name Last_Name Email");
+            String[] header = {"First_Name Last_Name Email"};
             tempDatastore.add(header);
         }
     }
 
-    public boolean addEntry(ArrayList<String> payload){
+    public boolean addEntry(String[] payload){
         System.out.println("add");
-        List<String> entry = new ArrayList<>();
-        entry.add(String.valueOf(payload));
-
         this.setListHeader();
-        tempDatastore.add(entry);
+        tempDatastore.add(payload);
         return true;
 
     }
-    public boolean updateEntry(int index, ArrayList<String> payloadArr) {
+    public boolean updateEntry(int index, String[] payloadArr,
+                               String[] originalPayload) {
         if (tempDatastore.isEmpty()) {
             System.out.println("No entries to update");
             return false;
         }
         String[] updatedPayload = new String[3];
+        switch(payloadArr.length){
+            case 1:
+                updatedPayload[0] = payloadArr[0];
+                updatedPayload[1] = originalPayload[1];
+                updatedPayload[2] = originalPayload[2];
+                break;
+            case 2:
+                updatedPayload[0] = payloadArr[0];
+                updatedPayload[1] = payloadArr[1];
+                updatedPayload[2] = originalPayload[2];
+                break;
+            case 3:
+                updatedPayload[0] = payloadArr[0];
+                updatedPayload[1] = payloadArr[1];
+                updatedPayload[2] = payloadArr[2];
+                break;
+        }
+
+        tempDatastore.set(index, updatedPayload);
         return true;
         }
 
-//        switch(payloadArr.length){
-//            case 1:
-//                updatedPayload[0] = payloadArr[0];
-//                updatedPayload[1] = tempDatastore.get(index).get(1);
-//                updatedPayload[2] = tempDatastore.get(index).get(2);
-//                break;
-//            case 2:
-//                updatedPayload[0] = payloadArr[0];
-//                updatedPayload[1] = payloadArr[1];
-//                updatedPayload[2] = tempDatastore.get(index).get(2);
-//                break;
-//            case 3:
-//                updatedPayload[0] = payloadArr[0];
-//                updatedPayload[1] = payloadArr[1];
-//                updatedPayload[2] = payloadArr[2];
-//                break;
-//        }
-//
-//        tempDatastore.get(index).set(0, Arrays.toString(updatedPayload));
-//        return false;
+
 
 //    }
 
@@ -95,9 +92,12 @@ public class Receiver {
         }
 
         System.out.println("List");
-        for (List<String> entry : tempDatastore) {
+        for (String[] entry : tempDatastore) {
             System.out.printf("%d. ", tempDatastore.indexOf(entry));
-            System.out.printf("%s\n", entry.getFirst());
+            for (String s : entry) {
+                System.out.printf("%s ", s);
+            }
+            System.out.println();
         }
     }
 

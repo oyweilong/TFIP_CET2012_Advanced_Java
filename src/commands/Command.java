@@ -6,14 +6,12 @@ import java.util.Arrays;
 public interface Command {
 
     boolean execute();
-    default ArrayList<String> parsePayload(String payload){
+    default String[] parsePayload(String payload){
         String[] payloadArr = payload.split(" ");
-        ArrayList<String> payloadList = new ArrayList<>();
         for (int i = 0; i < payloadArr.length; i++) {
             payloadArr[i] = payloadArr[i].trim();
         }
 
-        payloadList.addAll(Arrays.asList(payloadArr));
-        return payloadList;
+        return payloadArr;
     }
 }
