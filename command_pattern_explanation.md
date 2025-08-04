@@ -15,7 +15,7 @@ The commands.Command Design Pattern encapsulates a request as an object, thereby
 - **In Your Assignment**: The `Main` class with user input handling
 - **Example**:
   ```java
-import commands.AddCommand;   // Client creates receiver
+  import commands.AddCommand;   // Client creates receiver
   DataStore dataStore = new DataStore();
   
   // Client creates concrete command with receiver
