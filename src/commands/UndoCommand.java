@@ -1,9 +1,17 @@
 package commands;
 
+import data.Receiver;
+
 public class UndoCommand implements Command {
-    @Override
-    public boolean execute(){
-        return true;
+    private final Receiver receiver;
+
+    public UndoCommand(){
+        receiver = new Receiver();
     }
 
+    @Override
+    public boolean execute(){
+        receiver.undo();
+        return false;
+    }
 }

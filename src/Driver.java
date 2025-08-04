@@ -1,8 +1,7 @@
 
-import commands.Command;
+import data.Entry;
 import data.Receiver;
 import invoker.Invoker;
-import java.util.Stack;
 
 public class Driver {
     public static void main(String[] args) {
@@ -13,9 +12,12 @@ public class Driver {
         Entry.add(r, "John Doe <EMAIL>");
         Entry.add(r, "Jane Lai <EMAIL>");
         Entry.add(r, "Bob Lim <EMAIL>");
-//        Entry.delete(r, 1);
         Entry.list(r);
-//        Entry.update(r, 2, "King Kong <EMAIL>");
+        Entry.update(r, 2, "King Kong <EMAIL>");
+        Entry.delete(r, 1);
+        Entry.list(r);
+        Entry.undo();
+        Entry.list(r);
         Entry.update(r, 2, "Tim");
         Entry.list(r);
 

@@ -1,13 +1,13 @@
-import commands.*;
-import data.Receiver;
+package data;
 
-import java.util.ArrayList;
+import commands.*;
+
 import java.util.Stack;
 
 public class Entry {
-    static Command[] cmdArr= new Command[1];
+    public static Command[] cmdArr= new Command[1];
     private static int cmdCount = 0;
-    static Stack<Command> history = new Stack<>();
+    public static Stack<Command> history = new Stack<>();
 
     public static void add(Receiver r, String payload){
         AddCommand add = new AddCommand(r, payload);
@@ -28,6 +28,10 @@ public class Entry {
         addToCmdArr(list);
     }
 
+    public static void undo(){
+        UndoCommand undo = new UndoCommand();
+        addToCmdArr(undo);
+    }
     private static void addToCmdArr(Command command){
         //Try-catch block for dynamically increasing size of cmdArr when needed
         try{

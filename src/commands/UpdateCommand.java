@@ -2,13 +2,11 @@ package commands;
 
 import data.Receiver;
 
-import java.util.ArrayList;
-
 public class UpdateCommand implements Command {
     private final Receiver receiver;
     private final int index;
     private final String payload;
-    private String[] originalpayload;
+    private String[] originalPayload;
 
     //TODO Add try catch to catch invalid payload inputs, index etc
     public UpdateCommand(Receiver receiver, int index, String payload)
@@ -21,13 +19,19 @@ public class UpdateCommand implements Command {
     @Override
     public boolean execute(){
         try {
-            this.originalpayload = receiver.tempDatastore.get(index);
+            this.originalPayload = receiver.tempDatastore.get(index);
         } catch (IndexOutOfBoundsException e){
             System.out.println("Index out of bounds");
             return false;
         }
         return receiver.updateEntry(index,
                 this.parsePayload(payload),
-                this.originalpayload);
+                this.originalPayload);
+    }
+
+    @Override
+    public void undo(){
+        receiver.deleteEntry(index);
+        receiver.addEntry(index, originalPayload);
     }
 }

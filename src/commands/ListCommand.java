@@ -3,7 +3,7 @@ package commands;
 import data.Receiver;
 
 public class ListCommand implements Command {
-    private Receiver receiver;
+    private final Receiver receiver;
     public ListCommand(Receiver receiver){
         this.receiver = receiver;
     }

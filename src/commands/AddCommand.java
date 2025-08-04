@@ -2,13 +2,9 @@ package commands;
 
 import data.Receiver;
 
-import java.util.ArrayList;
-import java.util.Stack;
-
 public class AddCommand implements Command {
     private final Receiver receiver;
     private final String[] payload;
-
 
     public AddCommand(Receiver receiver, String payload){
         this.receiver = receiver;
@@ -39,7 +35,6 @@ public class AddCommand implements Command {
         System.out.println("Email is empty");
     }
 
-
     }
 
     @Override
@@ -47,5 +42,8 @@ public class AddCommand implements Command {
         return receiver.addEntry(payload);
     }
 
-
+   @Override
+    public void undo(){
+        receiver.deleteEntry(receiver.tempDatastore.size()-1);
+    }
 }

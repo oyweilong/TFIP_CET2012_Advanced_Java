@@ -1,13 +1,14 @@
 package data;
 
+import commands.Command;
+
 import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.EmptyStackException;
 
 
 //TODO add FileIO to write tempDatastore to a dataStore.txt file
@@ -31,11 +32,19 @@ public class Receiver {
     }
 
     public boolean addEntry(String[] payload){
-        System.out.println("add");
         this.setListHeader();
         tempDatastore.add(payload);
+        System.out.printf("Entry added: %d. ", tempDatastore.size()-1);
+        for (String s : payload) {
+            System.out.printf("%s ", s);
+        }
+        System.out.println();
         return true;
 
+    }
+    //addEntry method for .undo() methods in DeleteCommand and UpdateCommand
+    public void addEntry(int index, String[] payload){
+        tempDatastore.add(index, payload);
     }
     public boolean updateEntry(int index, String[] payloadArr,
                                String[] originalPayload) {
@@ -63,12 +72,14 @@ public class Receiver {
         }
 
         tempDatastore.set(index, updatedPayload);
+        System.out.printf("Entry updated: %d. ", index);
+        for (String s : updatedPayload) {
+            System.out.printf("%s ", s);
+        }
+        System.out.println();
         return true;
         }
 
-
-
-//    }
 
     public boolean deleteEntry(int index){
         if (tempDatastore.isEmpty()){
@@ -76,7 +87,13 @@ public class Receiver {
             return false;
         }
         try {
+            String[] deletedPayload = tempDatastore.get(index);
             tempDatastore.remove(index);
+            System.out.printf("Entry deleted: %d. ", index);
+            for (String s : deletedPayload) {
+                System.out.printf("%s ", s);
+            }
+            System.out.println();
             return true;
         }
         catch (IndexOutOfBoundsException e){
@@ -87,7 +104,7 @@ public class Receiver {
 
     public void list(){
         if (tempDatastore.isEmpty()){
-            System.out.println("No entries to list");
+            System.out.println("No file loaded or no entries to list");
             return;
         }
 
@@ -100,6 +117,16 @@ public class Receiver {
             System.out.println();
         }
     }
+
+    public void undo() {
+        try {
+            Entry.history.pop().undo();
+            System.out.println("Command undone");
+        } catch (EmptyStackException e) {
+            System.out.println("No commands to undo");
+        }
+    }
+
 
     public void loadFromFile(){
         Path path = Paths.get("src/dataStore.txt");
