@@ -1,5 +1,10 @@
 package data;
 
+import java.io.BufferedReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +30,7 @@ public class Receiver {
         }
     }
 
-    public boolean addEntry(String payload){
+    public boolean addEntry(String[] payload){
         System.out.println("add");
         List<String> entry = new ArrayList<>();
         entry.add(payload);
@@ -70,6 +75,12 @@ public class Receiver {
             System.out.printf("%d. ", tempDatastore.indexOf(entry));
             System.out.printf("%s\n", entry.getFirst());
         }
+    }
+
+    public void loadFromFile(){
+        Path path = Paths.get("src/dataStore.txt");
+        if (!Files.exists(path)) return;
+
     }
 
 
