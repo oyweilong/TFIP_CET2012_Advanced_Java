@@ -3,8 +3,8 @@ package commands;
 import data.Receiver;
 
 public class DeleteCommand implements Command {
-    private int index;
-    private Receiver receiver;
+    private final int index;
+    private final Receiver receiver;
 
     public DeleteCommand(Receiver receiver, int index){
         this.receiver = receiver;

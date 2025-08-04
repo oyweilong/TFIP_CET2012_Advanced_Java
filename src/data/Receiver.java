@@ -20,26 +20,51 @@ public class Receiver {
     private void setListHeader(){
         if (tempDatastore.isEmpty()){
             List<String> header = new ArrayList<>();
-            header.add("First_Name");
-            header.add("Last_Name");
-            header.add("Email");
+            header.add("First_Name Last_Name Email");
             tempDatastore.add(header);
         }
     }
 
-    public boolean addEntry(String firstname, String lastname, String email){
+    public boolean addEntry(String payload){
         System.out.println("add");
         List<String> entry = new ArrayList<>();
-        entry.add(firstname);
-        entry.add(lastname);
-        entry.add(email);
+        entry.add(payload);
 
         this.setListHeader();
         tempDatastore.add(entry);
         return true;
 
     }
+    public boolean updateEntry(int index, String firstname){
+        if (tempDatastore.isEmpty()){
+            System.out.println("No entries to update");
+            return false;
+        }
+        try {
+            tempDatastore.get(index).set(0, firstname);
+            return true;
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("Index out of bounds");
+        }
+        return false;
+    }
 
+    public boolean updateEntry(int index, String firstname, String lastname){
+        if (tempDatastore.isEmpty()){
+            System.out.println("No entries to update");
+            return false;
+        }
+        try {
+            tempDatastore.get(index).set(0, firstname);
+            tempDatastore.get(index).set(1, lastname);
+            return true;
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("Index out of bounds");
+        }
+        return false;
+    }
     public boolean updateEntry(int index, String firstname, String lastname, String email){
         if (tempDatastore.isEmpty()){
             System.out.println("No entries to update");
@@ -84,8 +109,7 @@ public class Receiver {
         System.out.println("List");
         for (List<String> entry : tempDatastore) {
             System.out.printf("%d. ", tempDatastore.indexOf(entry));
-            System.out.printf("%1s %2s %3s\n",
-                    entry.get(0), entry.get(1), entry.get(2));
+            System.out.printf("%s\n", entry.getFirst());
         }
     }
 

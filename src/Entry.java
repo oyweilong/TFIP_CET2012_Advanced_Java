@@ -8,15 +8,27 @@ public class Entry {
     private static int cmdCount = 0;
     static Stack<Command> history = new Stack<>();
 
-    public static void add(Receiver r, String firstname, String lastname,
-                     String email){
-        AddCommand add = new AddCommand(r, firstname, lastname, email );
+    public static void add(Receiver r, String payload){
+        AddCommand add = new AddCommand(r, payload);
         addToCmdArr(add);
     }
 
+    public static void update(Receiver r, int index, String firstname)
+    {
+        UpdateCommand update = new UpdateCommand(r, index, firstname);
+        addToCmdArr(update);
+
+    }
+    public static void update(Receiver r, int index, String firstname,
+                              String lastname)
+    {
+        UpdateCommand update = new UpdateCommand(r, index, firstname, lastname);
+        addToCmdArr(update);
+    }
     public static void update(Receiver r, int index,
                               String firstname, String lastname,
-                              String email){
+                              String email)
+    {
         UpdateCommand update = new UpdateCommand(r, index,
                               firstname, lastname, email);
         addToCmdArr(update);

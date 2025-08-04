@@ -3,22 +3,18 @@ package commands;
 import data.Receiver;
 
 public class AddCommand implements Command {
-    private Receiver receiver;
-    private String firstname;
-    private String lastname;
-    private String email;
+    private final Receiver receiver;
+    private final String payload;
 
-    public AddCommand(Receiver receiver, String firstname, String lastname,
-                      String email){
+
+    public AddCommand(Receiver receiver, String payload){
         this.receiver = receiver;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
+        this.payload = payload;
     }
 
     @Override
     public boolean execute(){
-        return receiver.addEntry(firstname, lastname, email);
+        return receiver.addEntry(payload);
     }
 
 
