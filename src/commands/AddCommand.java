@@ -2,11 +2,12 @@ package commands;
 
 import data.Receiver;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class AddCommand implements Command {
     private final Receiver receiver;
-    private final String[] payload;
+    private final ArrayList<String> payload;
 
 
     public AddCommand(Receiver receiver, String payload){
@@ -43,7 +44,7 @@ public class AddCommand implements Command {
 
     @Override
     public boolean execute(){
-        return receiver.addEntry(parsePayload());
+        return receiver.addEntry(payload);
     }
 
 

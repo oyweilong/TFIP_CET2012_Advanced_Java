@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Driver;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -30,24 +31,47 @@ public class Receiver {
         }
     }
 
-    public boolean addEntry(String[] payload){
+    public boolean addEntry(ArrayList<String> payload){
         System.out.println("add");
         List<String> entry = new ArrayList<>();
-        entry.add(payload);
+        entry.add(String.valueOf(payload));
 
         this.setListHeader();
         tempDatastore.add(entry);
         return true;
 
     }
-    public boolean updateEntry(int index, String[] payloadArr){
-        if (tempDatastore.isEmpty()){
+    public boolean updateEntry(int index, ArrayList<String> payloadArr) {
+        if (tempDatastore.isEmpty()) {
             System.out.println("No entries to update");
             return false;
         }
+        String[] updatedPayload = new String[3];
+        return true;
+        }
 
-        return false;
-    }
+//        switch(payloadArr.length){
+//            case 1:
+//                updatedPayload[0] = payloadArr[0];
+//                updatedPayload[1] = tempDatastore.get(index).get(1);
+//                updatedPayload[2] = tempDatastore.get(index).get(2);
+//                break;
+//            case 2:
+//                updatedPayload[0] = payloadArr[0];
+//                updatedPayload[1] = payloadArr[1];
+//                updatedPayload[2] = tempDatastore.get(index).get(2);
+//                break;
+//            case 3:
+//                updatedPayload[0] = payloadArr[0];
+//                updatedPayload[1] = payloadArr[1];
+//                updatedPayload[2] = payloadArr[2];
+//                break;
+//        }
+//
+//        tempDatastore.get(index).set(0, Arrays.toString(updatedPayload));
+//        return false;
+
+//    }
 
     public boolean deleteEntry(int index){
         if (tempDatastore.isEmpty()){
