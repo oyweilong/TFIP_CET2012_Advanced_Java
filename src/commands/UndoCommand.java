@@ -2,6 +2,8 @@ package commands;
 
 import data.Receiver;
 
+import java.util.EmptyStackException;
+
 public class UndoCommand implements Command {
     private final Receiver receiver;
 
@@ -11,7 +13,11 @@ public class UndoCommand implements Command {
 
     @Override
     public boolean execute(){
-        receiver.undo();
+        try{
+            receiver.undo();
+        } catch (EmptyStackException e){
+            System.out.println("No commands to undo");
+        }
         return false;
     }
 }

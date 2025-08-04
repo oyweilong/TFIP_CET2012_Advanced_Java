@@ -9,6 +9,7 @@ public class Driver {
        Receiver r = new Receiver();
 
        //Client execution
+        Entry.undo();
         Entry.add(r, "John Doe <EMAIL>");
         Entry.add(r, "Jane Lai <EMAIL>");
         Entry.add(r, "Bob Lim <EMAIL>");
@@ -20,6 +21,7 @@ public class Driver {
         Entry.list(r);
         Entry.update(r, 2, "Tim");
         Entry.list(r);
+        Entry.delete(r, 4);
 
 
         invoker.setCommandsForExecution(Entry.cmdArr);

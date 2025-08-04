@@ -21,7 +21,7 @@ public class UpdateCommand implements Command {
         try {
             this.originalPayload = receiver.tempDatastore.get(index);
         } catch (IndexOutOfBoundsException e){
-            System.out.println("Index out of bounds");
+            System.out.println("Update failed: Invalid index to update");
             return false;
         }
         return receiver.updateEntry(index,

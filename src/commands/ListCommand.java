@@ -9,6 +9,10 @@ public class ListCommand implements Command {
     }
     @Override
     public boolean execute(){
+        if (receiver.tempDatastore.isEmpty()){
+            System.out.println("No file loaded or no entries to list");
+            return false;
+        }
         receiver.list();
         return false;
     }

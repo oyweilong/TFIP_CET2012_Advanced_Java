@@ -1,14 +1,13 @@
 package data;
 
-import commands.Command;
 
-import java.io.BufferedReader;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EmptyStackException;
+
+
 
 
 //TODO add FileIO to write tempDatastore to a dataStore.txt file
@@ -103,11 +102,6 @@ public class Receiver {
     }
 
     public void list(){
-        if (tempDatastore.isEmpty()){
-            System.out.println("No file loaded or no entries to list");
-            return;
-        }
-
         System.out.println("List");
         for (String[] entry : tempDatastore) {
             System.out.printf("%d. ", tempDatastore.indexOf(entry));
@@ -119,14 +113,8 @@ public class Receiver {
     }
 
     public void undo() {
-        try {
             Entry.history.pop().undo();
-            System.out.println("Command undone");
-        } catch (EmptyStackException e) {
-            System.out.println("No commands to undo");
-        }
     }
-
 
     public void loadFromFile(){
         Path path = Paths.get("src/dataStore.txt");

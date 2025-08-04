@@ -13,8 +13,14 @@ public class DeleteCommand implements Command {
     }
     @Override
     public boolean execute(){
-        this.deletedPayload = receiver.tempDatastore.get(index);
-        return receiver.deleteEntry(index);
+        try{
+            deletedPayload = receiver.tempDatastore.get(index);
+            return receiver.deleteEntry(index);
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("Delete failed: Invalid index for deletion");
+            return false;
+        }
+
     }
     @Override
     public void undo(){
