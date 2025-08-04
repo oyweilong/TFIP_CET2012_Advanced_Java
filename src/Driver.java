@@ -10,10 +10,12 @@ public class Driver {
        Receiver r = new Receiver();
 
        //Client execution
-        Entry.delete(r, 1);
         Entry.add(r, "John", "Doe", "<EMAIL>");
         Entry.add(r, "Jane", "Lai", "<EMAIL>");
+        Entry.add(r, "Bob", "Lim", "<EMAIL>");
         Entry.delete(r, 1);
+        Entry.list(r);
+        Entry.update(r, 2, "King", "Kong", "<EMAIL>");
         Entry.list(r);
 
 

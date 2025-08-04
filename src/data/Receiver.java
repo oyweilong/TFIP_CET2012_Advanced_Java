@@ -40,6 +40,26 @@ public class Receiver {
 
     }
 
+    public boolean updateEntry(int index, String firstname, String lastname, String email){
+        if (tempDatastore.isEmpty()){
+            System.out.println("No entries to update");
+            return false;
+        }
+
+        List<String> entry = new ArrayList<>();
+        entry.add(firstname);
+        entry.add(lastname);
+        entry.add(email);
+
+        try {
+            tempDatastore.set(index, entry);
+            return true;
+        }
+        catch (IndexOutOfBoundsException e){
+            System.out.println("Index out of bounds");
+        }
+        return false;
+    }
     public boolean deleteEntry(int index){
         if (tempDatastore.isEmpty()){
             System.out.println("No entries to delete");

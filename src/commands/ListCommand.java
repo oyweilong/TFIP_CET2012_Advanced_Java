@@ -12,5 +12,4 @@ public class ListCommand implements Command {
         receiver.list();
         return false;
     }
-
 }

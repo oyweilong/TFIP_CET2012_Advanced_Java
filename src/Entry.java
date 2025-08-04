@@ -1,7 +1,4 @@
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.ListCommand;
+import commands.*;
 import data.Receiver;
 
 import java.util.Stack;
@@ -17,6 +14,13 @@ public class Entry {
         addToCmdArr(add);
     }
 
+    public static void update(Receiver r, int index,
+                              String firstname, String lastname,
+                              String email){
+        UpdateCommand update = new UpdateCommand(r, index,
+                              firstname, lastname, email);
+        addToCmdArr(update);
+    }
     public static void delete(Receiver r, int index){
         DeleteCommand delete = new DeleteCommand(r, index);
         addToCmdArr(delete);
