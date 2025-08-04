@@ -5,32 +5,28 @@ import data.Receiver;
 public class UpdateCommand implements Command {
     private final Receiver receiver;
     private final int index;
-    private final String firstname;
-    private String lastname;
-    private String email;
+    private final String payload;
+    private String originalpayload;
 
-    public UpdateCommand(Receiver receiver, int index, String firstname)
+    public UpdateCommand(Receiver receiver, int index, String payload)
     {
         this.receiver = receiver;
         this.index = index;
-        this.firstname = firstname;
+        this.payload = payload;
+        this.originalpayload = receiver.tempDatastore.get(index).getFirst();
     }
 
-    public UpdateCommand(Receiver receiver, int index, String firstname,
-                         String lastname)
-    {
-        this(receiver, index, firstname);
-        this.lastname = lastname;
-    }
-
-    public UpdateCommand(Receiver receiver, int index, String firstname,
-                         String lastname, String email)
-    {
-        this(receiver, index, firstname, lastname);
-        this.email = email;
-    }
+//    private String[] parsePayload(String payload){
+//        String[] payloadArr = payload.split(" ");
+//
+//        for (int i = 0; i < payloadArr.length; i++) {
+//            payloadArr[i] = payloadArr[i].trim();
+//        }
+//
+//        return payloadArr;
+//    }
     @Override
     public boolean execute(){
-        return receiver.updateEntry(index, firstname, lastname, email);
+        return receiver.updateEntry(index, this.parsePayload(payload));
     }
 }

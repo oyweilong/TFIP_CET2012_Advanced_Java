@@ -15,7 +15,7 @@ import java.util.List;
 // successfully (before file IO stage)
 
 public class Receiver {
-    ArrayList<List<String>> tempDatastore = new ArrayList<>();
+    public ArrayList<List<String>> tempDatastore = new ArrayList<>();
 
     private void setListHeader(){
         if (tempDatastore.isEmpty()){
@@ -35,56 +35,15 @@ public class Receiver {
         return true;
 
     }
-    public boolean updateEntry(int index, String firstname){
-        if (tempDatastore.isEmpty()){
-            System.out.println("No entries to update");
-            return false;
-        }
-        try {
-            tempDatastore.get(index).set(0, firstname);
-            return true;
-        }
-        catch (IndexOutOfBoundsException e){
-            System.out.println("Index out of bounds");
-        }
-        return false;
-    }
-
-    public boolean updateEntry(int index, String firstname, String lastname){
-        if (tempDatastore.isEmpty()){
-            System.out.println("No entries to update");
-            return false;
-        }
-        try {
-            tempDatastore.get(index).set(0, firstname);
-            tempDatastore.get(index).set(1, lastname);
-            return true;
-        }
-        catch (IndexOutOfBoundsException e){
-            System.out.println("Index out of bounds");
-        }
-        return false;
-    }
-    public boolean updateEntry(int index, String firstname, String lastname, String email){
+    public boolean updateEntry(int index, String[] payloadArr){
         if (tempDatastore.isEmpty()){
             System.out.println("No entries to update");
             return false;
         }
 
-        List<String> entry = new ArrayList<>();
-        entry.add(firstname);
-        entry.add(lastname);
-        entry.add(email);
-
-        try {
-            tempDatastore.set(index, entry);
-            return true;
-        }
-        catch (IndexOutOfBoundsException e){
-            System.out.println("Index out of bounds");
-        }
         return false;
     }
+
     public boolean deleteEntry(int index){
         if (tempDatastore.isEmpty()){
             System.out.println("No entries to delete");

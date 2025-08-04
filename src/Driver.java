@@ -15,7 +15,7 @@ public class Driver {
         Entry.add(r, "Bob Lim <EMAIL>");
         Entry.delete(r, 1);
         Entry.list(r);
-        Entry.update(r, 2, "King", "Kong", "<EMAIL>");
+        Entry.update(r, 2, "King Kong <EMAIL>");
         Entry.update(r, 2, "Tim");
         Entry.list(r);
 
