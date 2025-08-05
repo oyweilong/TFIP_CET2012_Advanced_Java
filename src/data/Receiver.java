@@ -8,9 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -28,15 +28,7 @@ public class Receiver {
     public ArrayList<String[]> tempDatastore = new ArrayList<>();
     public static String FILE_PATH = "src/dataStore.txt";
 
-    private void setListHeader(){
-        if (tempDatastore.isEmpty()){
-            String[] header = {"First_Name Last_Name Email"};
-            tempDatastore.add(header);
-        }
-    }
-
     public boolean addEntry(String[] payload){
-        this.setListHeader();
         tempDatastore.add(payload);
         System.out.printf("Entry added: %d. ", tempDatastore.size()-1);
         for (String s : payload) {
@@ -44,8 +36,8 @@ public class Receiver {
         }
         System.out.println();
         return true;
-
     }
+
     //addEntry method for .undo() methods in DeleteCommand and UpdateCommand
     public void addEntry(int index, String[] payload){
         tempDatastore.add(index, payload);
@@ -111,7 +103,7 @@ public class Receiver {
     public void list(){
         System.out.println("List");
         for (String[] entry : tempDatastore) {
-            System.out.printf("%d. ", tempDatastore.indexOf(entry));
+            System.out.printf("%d. ", tempDatastore.indexOf(entry) + 1);
             for (String s : entry) {
                 System.out.printf("%s ", s);
             }
@@ -128,8 +120,12 @@ public class Receiver {
     public void storeToFile() throws CustomException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             for (String[] entry : tempDatastore) {
-                // entry[0] = First Name, entry [1] = Last Name, entry [2] = email
-                writer.println(String.join(entry[0] + " " + entry[1] + " " + entry[2]));
+                if (entry.length == 3) {
+                    // entry[0] = First Name, entry [1] = Last Name, entry [2] = email
+                    writer.println(entry[0] + " " + entry[1] + " " + entry[2]);
+                } else {
+                    System.err.println("Skipping malformed entry: " + Arrays.toString(entry));
+                }
             }
         } catch (IOException e) {
             throw new CustomException("Error writing to file: " + e.getMessage());
@@ -150,6 +146,8 @@ public class Receiver {
                 String[] entry = line.split(" ", 3);
                 if (entry.length == 3) {
                     tempDatastore.add(entry);
+                } else {
+                    System.err.println("Skipping malformed entry: " + Arrays.toString(entry));
                 }
             }
         } catch (IOException e) {

@@ -1,15 +1,17 @@
 
 import data.Entry;
 import data.Receiver;
+import exceptions.CustomException;
 import invoker.Invoker;
 
 public class Driver {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CustomException {
        Invoker invoker = new Invoker();
        Receiver r = new Receiver();
 
        //Client execution
         Entry.undo();
+        Entry.add(r, "First_Name Last_Name <EMAIL>");
         Entry.add(r, "John Doe <EMAIL>");
         Entry.add(r, "Jane Lai <EMAIL>");
         Entry.add(r, "Bob Lim <EMAIL>");
@@ -28,6 +30,7 @@ public class Driver {
         invoker.executeCommand(Entry.history);
         System.out.println(Entry.history);
 
+        r.storeToFile();
     }
 
 }
