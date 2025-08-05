@@ -11,4 +11,13 @@ public interface Command {
         return payloadArr;
     }
 
+    default String toTitlecase(String string){
+        char[] charArray = string.toCharArray();
+        charArray[0] = Character.toUpperCase(charArray[0]);
+        for (int i = 1; i < charArray.length; i++) {
+            charArray[i] = Character.toLowerCase(charArray[i]);
+        }
+        return String.valueOf(charArray);
+    }
+
 }

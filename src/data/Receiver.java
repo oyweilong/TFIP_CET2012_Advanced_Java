@@ -70,7 +70,7 @@ public class Receiver {
         }
 
         tempDatastore.set(index, updatedPayload);
-        System.out.printf("Entry updated: %d. ", index);
+        System.out.printf("Entry updated: %d. ", index+1);
         for (String s : updatedPayload) {
             System.out.printf("%s ", s);
         }
@@ -87,7 +87,7 @@ public class Receiver {
         try {
             String[] deletedPayload = tempDatastore.get(index);
             tempDatastore.remove(index);
-            System.out.printf("Entry deleted: %d. ", index);
+            System.out.printf("Entry deleted: %d. ", index+1);
             for (String s : deletedPayload) {
                 System.out.printf("%s ", s);
             }

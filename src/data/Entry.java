@@ -14,12 +14,12 @@ public class Entry {
         addToCmdArr(add);
     }
 
-   public static void update(Receiver r, int index, String payload){
+   public static void update(Receiver r, String index, String payload){
         UpdateCommand update = new UpdateCommand(r, index, payload);
         addToCmdArr(update);
    }
 
-    public static void delete(Receiver r, int index){
+    public static void delete(Receiver r, String index){
         DeleteCommand delete = new DeleteCommand(r, index);
         addToCmdArr(delete);
     }

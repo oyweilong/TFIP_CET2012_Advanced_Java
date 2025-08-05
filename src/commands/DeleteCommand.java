@@ -2,14 +2,15 @@ package commands;
 
 import data.Receiver;
 
+
 public class DeleteCommand implements Command {
     private final int index;
     private final Receiver receiver;
     private String[] deletedPayload;
 
-    public DeleteCommand(Receiver receiver, int index){
+    public DeleteCommand(Receiver receiver, String index){
         this.receiver = receiver;
-        this.index = index;
+        this.index = Integer.parseInt(index)-1;
     }
     @Override
     public boolean execute(){

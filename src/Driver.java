@@ -10,27 +10,31 @@ public class Driver {
        Receiver r = new Receiver();
 
        //Client execution
-        Entry.undo();
-        Entry.add(r, "First_Name Last_Name <EMAIL>");
-        Entry.add(r, "John Doe <EMAIL>");
-        Entry.add(r, "Jane Lai <EMAIL>");
-        Entry.add(r, "Bob Lim <EMAIL>");
+//        Entry.undo();
+//        Entry.add(r, "First_Name Last_Name <EMAIL>");
+        Entry.add(r, "joHn doe johndoe@gmail.com");
+        Entry.add(r, "Jane Lai jane_lai@gmail.com");
+        Entry.add(r, "Bob Lim bob__lim@gmail.com");
+        Entry.add(r, "Bob Lim ");
         Entry.list(r);
-        Entry.update(r, 2, "King Kong <EMAIL>");
-        Entry.delete(r, 1);
+        Entry.update(r, "1", "King Kong <EMAIL>");
+        Entry.update(r, "1", "Gary Sim garysim@gmail.com");
         Entry.list(r);
-        Entry.undo();
+        Entry.delete(r, "1");
         Entry.list(r);
-        Entry.update(r, 2, "Tim");
-        Entry.list(r);
-        Entry.delete(r, 4);
+//        Entry.undo();
+//        Entry.list(r);
+//        Entry.update(r, 2, "Tim");
+//        Entry.list(r);
+//        Entry.delete(r, 4);
 
-
+//        r.loadFromFile();
         invoker.setCommandsForExecution(Entry.cmdArr);
         invoker.executeCommand(Entry.history);
         System.out.println(Entry.history);
 
         r.storeToFile();
+
     }
 
 }
