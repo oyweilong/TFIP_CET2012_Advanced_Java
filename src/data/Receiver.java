@@ -2,6 +2,11 @@ package data;
 
 
 
+import exceptions.CustomException;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,6 +27,7 @@ import java.util.ArrayList;
 
 public class Receiver {
     public ArrayList<String[]> tempDatastore = new ArrayList<>();
+    public static String FILE_PATH = "src/dataStore.txt";
 
     private void setListHeader(){
         if (tempDatastore.isEmpty()){
@@ -51,6 +57,8 @@ public class Receiver {
             System.out.println("No entries to update");
             return false;
         }
+
+
         String[] updatedPayload = new String[3];
         switch(payloadArr.length){
             case 1:
@@ -114,6 +122,18 @@ public class Receiver {
 
     public void undo() {
             Entry.history.pop().undo();
+    }
+    /**
+     * Stores data to file
+     */
+    public void storeToFile() throws CustomException {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
+            for (Employee emp : employees) {
+                writer.println(emp.getFirstName() + "," + emp.getLastName() + "," + emp.getEmail());
+            }
+        } catch (IOException e) {
+            throw new CustomException("Error writing to file: " + e.getMessage());
+        }
     }
 
     public void loadFromFile(){
