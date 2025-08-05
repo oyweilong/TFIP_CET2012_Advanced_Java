@@ -11,8 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-
-
+import java.util.List;
 
 
 //TODO add FileIO to write tempDatastore to a dataStore.txt file
@@ -128,19 +127,32 @@ public class Receiver {
      */
     public void storeToFile() throws CustomException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
-            for (Employee emp : employees) {
-                writer.println(emp.getFirstName() + "," + emp.getLastName() + "," + emp.getEmail());
+            for (String[] entry : tempDatastore) {
+                // Join array into one CSV line
+                writer.println(String.join(",", entry));
             }
         } catch (IOException e) {
             throw new CustomException("Error writing to file: " + e.getMessage());
         }
     }
-
+    /**
+     * Loads data from file on startup
+     */
     public void loadFromFile(){
-        Path path = Paths.get("src/dataStore.txt");
-        if (!Files.exists(path)) return;
+        try {
+            if (!Files.exists(Paths.get(FILE_PATH))) {
+                return;
+            }
 
+            List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
+            for (String line : lines) {
+                String[] entry = line.split(",");
+                if (entry.length == 3) {
+                    tempDatastore.add(entry);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
     }
-
-
 }
