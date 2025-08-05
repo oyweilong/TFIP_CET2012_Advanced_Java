@@ -1,6 +1,7 @@
-package data;
+package client;
 
 import commands.*;
+import data.Receiver;
 
 import java.util.Stack;
 
@@ -28,8 +29,8 @@ public class Entry {
         addToCmdArr(list);
     }
 
-    public static void undo(){
-        UndoCommand undo = new UndoCommand();
+    public static void undo(Receiver r, Stack<Command> history){
+        UndoCommand undo = new UndoCommand(r, history);
         addToCmdArr(undo);
     }
     private static void addToCmdArr(Command command){

@@ -2,6 +2,8 @@ package data;
 
 
 
+
+import commands.Command;
 import exceptions.CustomException;
 
 import java.io.FileWriter;
@@ -12,10 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-
-
-
+import java.util.Stack;
 
 
 //TODO add exceptions to be thrown if email string is not input in the
@@ -109,8 +108,8 @@ public class Receiver {
         }
     }
 
-    public void undo() {
-            Entry.history.pop().undo();
+    public void undo(Stack<Command> history) {
+        history.pop().undo();
     }
     /**
      * Stores data to file
