@@ -8,7 +8,8 @@ public class Driver {
     public static void main(String[] args) throws CustomException {
        Invoker invoker = new Invoker();
        Receiver r = new Receiver();
-
+//TODO STORE HISTORY IN CLIENT NOT RECEIVER
+        //TODO undo takes in receiver and history as parameters
        //Client execution
 //        Entry.undo();
 //        Entry.add(r, "First_Name Last_Name <EMAIL>");

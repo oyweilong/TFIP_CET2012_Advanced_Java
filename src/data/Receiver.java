@@ -14,15 +14,13 @@ import java.util.Arrays;
 import java.util.List;
 
 
-//TODO add FileIO to write tempDatastore to a dataStore.txt file
-//TODO add FileIO to read in existing dataStore.txt (load saved file)
 
-//TODO add regex validation for email string to methods
+
+
+
 //TODO add exceptions to be thrown if email string is not input in the
 // correct format
 
-//TODO add return values to methods to indicate if command has been performed
-// successfully (before file IO stage)
 
 public class Receiver {
     public ArrayList<String[]> tempDatastore = new ArrayList<>();
