@@ -128,8 +128,8 @@ public class Receiver {
     public void storeToFile() throws CustomException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             for (String[] entry : tempDatastore) {
-                // Join array into one CSV line
-                writer.println(String.join(",", entry));
+                // entry[0] = First Name, entry [1] = Last Name, entry [2] = email
+                writer.println(String.join(entry[0] + " " + entry[1] + " " + entry[2]));
             }
         } catch (IOException e) {
             throw new CustomException("Error writing to file: " + e.getMessage());
@@ -143,10 +143,11 @@ public class Receiver {
             if (!Files.exists(Paths.get(FILE_PATH))) {
                 return;
             }
-
+            tempDatastore.clear(); // to clear or not?
             List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
             for (String line : lines) {
-                String[] entry = line.split(",");
+                // Split by space into 3 parts
+                String[] entry = line.split(" ", 3);
                 if (entry.length == 3) {
                     tempDatastore.add(entry);
                 }
