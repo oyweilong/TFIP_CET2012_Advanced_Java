@@ -121,11 +121,13 @@ public class Receiver {
                     // entry[0] = First Name, entry [1] = Last Name, entry [2] = email
                     writer.println(entry[0] + " " + entry[1] + " " + entry[2]);
                 } else {
-                    System.err.println("Skipping malformed entry: " + Arrays.toString(entry));
+                    throw new CustomException("Skipping malformed entry: " +  Arrays.toString(entry));
                 }
             }
         } catch (IOException e) {
             throw new CustomException("Error writing to file: " + e.getMessage());
+        }catch (CustomException e){
+            System.out.println(e.getMessage());
         }
     }
     /**
@@ -144,11 +146,13 @@ public class Receiver {
                 if (entry.length == 3) {
                     tempDatastore.add(entry);
                 } else {
-                    System.err.println("Skipping malformed entry: " + Arrays.toString(entry));
+                    throw new CustomException("Skipping malformed entry: " + Arrays.toString(entry));
                 }
             }
         } catch (IOException e) {
             System.err.println("Error reading file: " + e.getMessage());
+        } catch (CustomException e){
+            System.out.println(e.getMessage());
         }
     }
 }
