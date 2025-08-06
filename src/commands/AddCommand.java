@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class AddCommand implements Command {
     private final Receiver receiver;
     private final String[] payload;
-    private String[] validatedPayload = new String[3];
+    private final String[] validatedPayload = new String[3];
 
     public AddCommand(Receiver receiver, String payload){
         this.receiver = receiver;
@@ -23,7 +23,7 @@ public class AddCommand implements Command {
         if (payloadArr.length != 3) {
 
             throw new CustomException("Invalid Add command. Add command " +
-                    "format: add " +
+                    "format: " +
                     "<firstName> " +
                     "<lastName> <email>\n" +
                     "Example: add John Doe john@example.com");
@@ -40,8 +40,6 @@ public class AddCommand implements Command {
         Matcher m = p.matcher(email);
         if (!m.matches()) {
             throw new CustomException("Invalid email format");
-//            System.out.println("Invalid email format");
-//            return false;
         }
 
         validatedPayload[0] = firstName;

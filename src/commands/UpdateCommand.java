@@ -1,6 +1,7 @@
 package commands;
 
 import data.Receiver;
+import exceptions.CustomException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,9 +11,8 @@ public class UpdateCommand implements Command {
     private final int index;
     private final String[] payload;
     private String[] originalPayload;
-    private String[] validatedPayload;
+    private final String[] validatedPayload;
 
-    //TODO Add try catch to catch invalid payload inputs, index etc
     public UpdateCommand(Receiver receiver, String index, String payload)
     {
         this.receiver = receiver;
@@ -22,15 +22,14 @@ public class UpdateCommand implements Command {
     }
 
     // Validation for UPDATE command
-    public boolean validateAndExecute(String[] payloadArr) {
+    public boolean validateAndExecute(String[] payloadArr) throws CustomException {
         // Layer 1: Check the number of payloads
         if (payloadArr.length ==0 || payloadArr.length > 3) {
-            System.out.print("Invalid Update command. \n" +
+            throw new CustomException("Invalid Update command. \n" +
                     "Update command format: <firstName> <lastName> <email>,\n"+
                     "<firstName> <lastName>,\n" +
                     "<firstName>\n" +
                     "Example: John Doe john@example.com");
-            return false;
         }
         //Layer 2: Email validation
         if (payloadArr.length == 3) {
@@ -39,8 +38,7 @@ public class UpdateCommand implements Command {
                             "([A-Za-z0-9]|([.-](?![.-])))+[A-Za-z0-9]\\.[a-z]{2,3}");
             Matcher m = p.matcher(payloadArr[2]);
             if (!m.matches()) {
-                System.out.println("Invalid email format");
-                return false;
+                throw new CustomException("Invalid email format");
             }
             else validatedPayload[2] = payloadArr[2];
         }
@@ -66,10 +64,15 @@ public class UpdateCommand implements Command {
             System.out.println("Update failed: Invalid index to update");
             return false;
         }
-        if(validateAndExecute(payload)){
-            return receiver.updateEntry(index, validatedPayload, originalPayload);
+        try{
+            if(validateAndExecute(payload))
+                return receiver.updateEntry(index, validatedPayload, originalPayload);
+            else return false;
+        } catch (CustomException e){
+            System.out.println(e.getMessage());
+            return false;
         }
-        else return false;
+
 
     }
 

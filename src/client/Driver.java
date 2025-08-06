@@ -17,8 +17,8 @@ public class Driver {
         Entry.add(r, "Bob Lim bob__lim@gmail.com");
 //        Entry.add(r, "Bob Lim ");
 //        Entry.list(r);
-//        Entry.update(r, "1", "King Kong <EMAIL>");
-//        Entry.update(r, "1", "Gary Sim garysim@gmail.com");
+        Entry.update(r, "1", "King Kong <EMAIL>");
+        Entry.update(r, "1","Gary ao ao garysim@gmail.com");
 //        Entry.list(r);
 //        Entry.delete(r, "1");
 //        Entry.list(r);
