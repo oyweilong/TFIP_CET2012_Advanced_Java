@@ -18,14 +18,15 @@ public class AddCommand implements Command {
     }
 
     // Validation for ADD command
-    public boolean validateAndExecute(String[] payloadArr) {
+    public boolean validateAndExecute(String[] payloadArr) throws CustomException{
         // Layer 1: Check the number of payloads
         if (payloadArr.length != 3) {
-            System.out.println("Invalid Add command. Add command format: add " +
+
+            throw new CustomException("Invalid Add command. Add command " +
+                    "format: add " +
                     "<firstName> " +
                     "<lastName> <email>\n" +
                     "Example: add John Doe john@example.com");
-            return false;
         }
 
         String firstName = toTitlecase(payloadArr[0]);
@@ -38,8 +39,9 @@ public class AddCommand implements Command {
                         "([A-Za-z0-9]|([.-](?![.-])))+[A-Za-z0-9]\\.[a-z]{2,3}");
         Matcher m = p.matcher(email);
         if (!m.matches()) {
-            System.out.println("Invalid email format");
-            return false;
+            throw new CustomException("Invalid email format");
+//            System.out.println("Invalid email format");
+//            return false;
         }
 
         validatedPayload[0] = firstName;
@@ -52,10 +54,14 @@ public class AddCommand implements Command {
 
     @Override
     public boolean execute(){
-        if(validateAndExecute(payload)){
-            return receiver.addEntry(validatedPayload);
+        try {
+            if (validateAndExecute(payload))
+                return receiver.addEntry(validatedPayload);
+            else return false;
+        }catch (CustomException e){
+            System.out.println(e.getMessage());
+            return false;
         }
-        else return false;
     }
 
    @Override
