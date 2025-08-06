@@ -16,13 +16,22 @@ public class Entry {
     }
 
    public static void update(Receiver r, String index, String payload){
-        UpdateCommand update = new UpdateCommand(r, index, payload);
-        addToCmdArr(update);
+        try{
+            UpdateCommand update = new UpdateCommand(r, index, payload);
+            addToCmdArr(update);
+        } catch(NumberFormatException e){
+            System.out.println("Invalid index for update");
+        }
    }
 
     public static void delete(Receiver r, String index){
-        DeleteCommand delete = new DeleteCommand(r, index);
-        addToCmdArr(delete);
+        try{
+            DeleteCommand delete = new DeleteCommand(r, index);
+            addToCmdArr(delete);
+        } catch(NumberFormatException e){
+            System.out.println("Invalid index for deletion");
+        }
+
     }
     public static void list(Receiver r){
         ListCommand list = new ListCommand(r);
