@@ -135,7 +135,7 @@ public class Receiver {
      * 1. Invalid entries
      * 2. Cannot write file
      */
-    public void storeToFile() throws CustomException {
+    public void storeToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             for (String[] entry : tempDatastore) {
                 if (entry.length == 3) {
@@ -146,7 +146,7 @@ public class Receiver {
                 }
             }
         } catch (IOException e) {
-            throw new CustomException("Error writing to file: " + e.getMessage());
+            System.err.println("Error writing to file: " + e.getMessage());
         }catch (CustomException e){
             System.out.println(e.getMessage());
         }

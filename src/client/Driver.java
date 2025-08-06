@@ -1,11 +1,10 @@
 package client;
 
 import data.Receiver;
-import exceptions.CustomException;
 import invoker.Invoker;
 
 public class Driver {
-    public static void main(String[] args) throws CustomException {
+    public static void main(String[] args) {
        Invoker invoker = new Invoker();
        Receiver r = new Receiver();
 
