@@ -17,7 +17,9 @@ public class UndoCommand implements Command {
     @Override
     public boolean execute(){
         try{
-            receiver.undo(history);
+            Command command = history.pop();
+            command.undo();
+//            receiver.undo(history);
         } catch (EmptyStackException e){
             System.out.println("No commands to undo");
         }

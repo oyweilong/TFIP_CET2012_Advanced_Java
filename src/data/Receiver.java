@@ -1,6 +1,6 @@
 package data;
 
-import commands.Command;
+//import commands.Command;
 import exceptions.CustomException;
 
 import java.io.FileWriter;
@@ -125,10 +125,10 @@ public class Receiver {
             System.out.println();
         }
     }
-
-    public void undo(Stack<Command> history) {
-        history.pop().undo();
-    }
+    //TODO MOVE THE HISTORY POP TO UNDOCOMMAND
+//    public void undo(Stack<Command> history) {
+//        history.pop().undo();
+//    }
     /**
      * Stores data items to file
      * Throws CustomExceptions for:

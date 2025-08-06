@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class Invoker {
     private Command[] cmdToExecute;
-
+    //TODO MOVE ALL EXCEPTIONS TO INVOKER
     public void setCommandsForExecution(Command[] cmdToExecute){
         this.cmdToExecute = cmdToExecute;
     }
