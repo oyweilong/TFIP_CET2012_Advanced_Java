@@ -115,6 +115,9 @@ public class Receiver {
         }
     }
 
+    /**
+     * Method to list entries of data items
+     */
     public void list(){
         System.out.println("List");
         for (String[] entry : tempDatastore) {
@@ -126,7 +129,7 @@ public class Receiver {
         }
     }
     /**
-     * Stores data items to file
+     * Method to store data items to file
      * Throws CustomExceptions for:
      * 1. Invalid entries
      * 2. Cannot write file
