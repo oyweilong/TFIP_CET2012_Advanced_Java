@@ -12,13 +12,13 @@ public class Driver {
        //Client execution
 //        Entry.undo();
 //        Entry.add(r, "First_Name Last_Name <EMAIL>");
-        Entry.add(r, "joHn doe sad johndoail.com");
+//        Entry.add(r, "joHn doe sad johndoail.com");
         Entry.add(r, "Jane Lai jane_lai@gmail.com");
-        Entry.add(r, "Bob Lim bob__lim@gmail.com");
+//        Entry.add(r, "Bob Lim bob__lim@gmail.com");
 //        Entry.add(r, "Bob Lim ");
 //        Entry.list(r);
-        Entry.update(r, "1", "King Kong <EMAIL>");
-        Entry.update(r, "1","Gary ao ao garysim@gmail.com");
+//        Entry.update(r, "1", "King Kong <EMAIL>");
+        Entry.update(r, "a","Gary lim garysim@gmail.com");
 //        Entry.list(r);
 //        Entry.delete(r, "1");
 //        Entry.list(r);
@@ -31,7 +31,7 @@ public class Driver {
         r.loadFromFile();
         invoker.setCommandsForExecution(Entry.cmdArr);
         invoker.executeCommand(Entry.history);
-        System.out.println(Entry.history);
+//        System.out.println(Entry.history);
 
         r.storeToFile();
 
