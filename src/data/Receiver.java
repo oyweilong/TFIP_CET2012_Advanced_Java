@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
+
 
 /**
  * Receiver class to perform operations when receive commands
@@ -125,10 +125,6 @@ public class Receiver {
             System.out.println();
         }
     }
-    //TODO MOVE THE HISTORY POP TO UNDOCOMMAND
-//    public void undo(Stack<Command> history) {
-//        history.pop().undo();
-//    }
     /**
      * Stores data items to file
      * Throws CustomExceptions for:

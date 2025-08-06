@@ -1,7 +1,9 @@
 package commands;
 
 public interface Command {
-    boolean execute();
+    boolean execute() throws Exception;
+    boolean checkUndoable();
+    String checkCmdType();
     default void undo(){}
     default String[] parsePayload(String payload){
         String[] payloadArr = payload.split(" ");
@@ -19,5 +21,7 @@ public interface Command {
         }
         return String.valueOf(charArray);
     }
+
+
 
 }

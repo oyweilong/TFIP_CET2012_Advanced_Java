@@ -6,8 +6,6 @@ import invoker.Invoker;
 
 import java.util.Stack;
 
-import static client.Entry.cmdArr;
-
 public class Driver {
     static int cmdCount = 0;
     static Command[] cmdArr= new Command[1];
@@ -16,22 +14,23 @@ public class Driver {
        Invoker invoker = new Invoker();
        Receiver r = new Receiver();
        Stack<Command> history = new Stack<>();
+
        //Client execution
 
-        add(r, "Jane Lai jane_lai@gmail.com");
-        add(r, "Jane Lai jane_lai@gmail.com");
-        add(r, "Jane Lai jane_lai@gmail.com");
+        add(r, "Jane Lai .jane_lai@gmail.com");
+        add(r, "King koNg king__.kong@gmail.com");
+        add(r, "Sam peReZ _.sam-perez._@gmail.com");
         update(r, "1","Gary lim garysim@gmail.com");
         list(r);
-        delete(r, "1");
+        delete(r, "5");
+        Command cmd = new ListCommand(r);
+        history.push(cmd);
         undo(r, history);
         list(r);
 
 //        r.loadFromFile();
         invoker.setCommandsForExecution(Driver.cmdArr);
         invoker.executeCommand(history);
-//        System.out.println(Entry.history);
-
         r.storeToFile();
 
     }

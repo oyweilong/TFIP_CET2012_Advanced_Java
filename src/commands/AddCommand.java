@@ -11,6 +11,9 @@ public class AddCommand implements Command {
     private final Receiver receiver;
     private final String[] payload;
     private final String[] validatedPayload = new String[3];
+    public boolean isUndoable = true;
+    public String cmdType = "Add";
+
 
     public AddCommand(Receiver receiver, String payload){
         this.receiver = receiver;
@@ -52,19 +55,24 @@ public class AddCommand implements Command {
 
 
     @Override
-    public boolean execute(){
-        try {
-            if (validateAndExecute(payload))
-                return receiver.addEntry(validatedPayload);
-            else return false;
-        }catch (CustomException e){
-            System.out.println(e.getMessage());
-            return false;
-        }
+    public boolean execute() throws CustomException{
+        if (validateAndExecute(payload))
+            return receiver.addEntry(validatedPayload);
+        else return false;
     }
 
    @Override
     public void undo(){
         receiver.deleteEntry(receiver.tempDatastore.size()-1);
+    }
+
+    @Override
+    public boolean checkUndoable(){
+        return isUndoable;
+    }
+
+    @Override
+    public String checkCmdType(){
+        return cmdType;
     }
 }
