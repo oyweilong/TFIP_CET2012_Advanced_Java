@@ -1,8 +1,5 @@
 package data;
 
-
-
-
 import commands.Command;
 import exceptions.CustomException;
 
@@ -16,15 +13,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-
-//TODO add exceptions to be thrown if email string is not input in the
-// correct format
-
-
+/**
+ * Receiver class to perform operations when receive commands
+ * tempDatastore to temporarily store array list of data items
+ * FIlE_PATH to store Relative Path for storing and loading dataStore text fileƒ
+ */
 public class Receiver {
     public ArrayList<String[]> tempDatastore = new ArrayList<>();
     public static String FILE_PATH = "src/dataStore.txt";
 
+    /**
+     * Default method to Add New Entry into dataStore, undoable
+     * @param payload variable to contain data items via inputs
+     * @return true for undoable Command
+     */
     public boolean addEntry(String[] payload){
         tempDatastore.add(payload);
         System.out.printf("Entry added: %d. ", tempDatastore.size()-1);
@@ -35,10 +37,22 @@ public class Receiver {
         return true;
     }
 
-    //addEntry method for .undo() methods in DeleteCommand and UpdateCommand
+    /**
+     *  Specific method to Add New Entry, only for .undo() in DeleteCommand() & UpdateCommand()
+     * @param index for referencing to which specific data items to undo
+     * @param payload variable to contain data via inputs
+     */
     public void addEntry(int index, String[] payload){
         tempDatastore.add(index, payload);
     }
+
+    /**
+     * Method to Update Entry, undoable
+     * @param index for referencing to which specific line of data items to undo
+     * @param payloadArr new array of data items to update existing data items
+     * @param originalPayload array of existing data items
+     * @return true for undoable Command
+     */
     public boolean updateEntry(int index, String[] payloadArr,
                                String[] originalPayload) {
         if (tempDatastore.isEmpty()) {
@@ -75,7 +89,11 @@ public class Receiver {
         return true;
         }
 
-
+    /**
+     * Method to delete Entry, undoable
+     * @param index for referencing to which specific line of data items to delete
+     * @return true for undoable command, false if index out of array bounds
+     */
     public boolean deleteEntry(int index){
         if (tempDatastore.isEmpty()){
             System.out.println("No entries to delete");
@@ -112,7 +130,10 @@ public class Receiver {
         history.pop().undo();
     }
     /**
-     * Stores data to file
+     * Stores data items to file
+     * Throws CustomExceptions for:
+     * 1. Invalid entries
+     * 2. Cannot write file
      */
     public void storeToFile() throws CustomException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
@@ -132,6 +153,9 @@ public class Receiver {
     }
     /**
      * Loads data from file on startup
+     * Throws CustomExceptions for:
+     * 1. Invalid entries
+     * 2. Cannot load file
      */
     public void loadFromFile(){
         try {
