@@ -18,7 +18,7 @@ public class Invoker {
             try{
                 if(cmd.execute())
                     cmdSuccess = true;
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 switch (e.getClass().getSimpleName()){
                     case "CustomException":
                         System.out.println(e.getMessage());

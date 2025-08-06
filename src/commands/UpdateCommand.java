@@ -58,7 +58,7 @@ public class UpdateCommand implements Command {
         return true;
     }
     @Override
-    public boolean execute() throws Exception{
+    public boolean execute() throws RuntimeException{
         originalPayload = receiver.tempDatastore.get(index);
         if(validateAndExecute(payload))
             return receiver.updateEntry(index, validatedPayload, originalPayload);

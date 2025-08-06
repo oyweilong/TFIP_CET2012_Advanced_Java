@@ -1,7 +1,7 @@
 package commands;
 
 public interface Command {
-    boolean execute() throws Exception;
+    boolean execute() throws RuntimeException;
     boolean checkUndoable();
     String checkCmdType();
     default void undo(){}
