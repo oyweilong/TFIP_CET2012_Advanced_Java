@@ -11,26 +11,21 @@ import static client.Entry.cmdArr;
 public class Driver {
     static int cmdCount = 0;
     static Command[] cmdArr= new Command[1];
+
     public static void main(String[] args) {
        Invoker invoker = new Invoker();
        Receiver r = new Receiver();
        Stack<Command> history = new Stack<>();
-
-
-
        //Client execution
 
         add(r, "Jane Lai jane_lai@gmail.com");
-        update(r, "a","Gary lim garysim@gmail.com");
+        add(r, "Jane Lai jane_lai@gmail.com");
+        add(r, "Jane Lai jane_lai@gmail.com");
+        update(r, "1","Gary lim garysim@gmail.com");
         list(r);
         delete(r, "1");
         undo(r, history);
         list(r);
-//
-//        Entry.list(r);
-//        Entry.update(r, 2, "Tim");
-//        Entry.list(r);
-//        Entry.delete(r, 4);
 
 //        r.loadFromFile();
         invoker.setCommandsForExecution(Driver.cmdArr);
@@ -42,13 +37,13 @@ public class Driver {
     }
     public static void add(Receiver r, String payload){
         AddCommand add = new AddCommand(r, payload);
-        addToCmdArr(add,cmdArr, cmdCount);
+        addToCmdArr(add);
     }
 
     public static void update(Receiver r, String index, String payload){
         try{
             UpdateCommand update = new UpdateCommand(r, index, payload);
-            addToCmdArr(update, cmdArr, cmdCount);
+            addToCmdArr(update);
         } catch(NumberFormatException e){
             System.out.println("Invalid index for update");
         }
@@ -57,7 +52,7 @@ public class Driver {
     public static void delete(Receiver r, String index){
         try{
             DeleteCommand delete = new DeleteCommand(r, index);
-            addToCmdArr(delete, cmdArr, cmdCount);
+            addToCmdArr(delete);
         } catch(NumberFormatException | ArrayIndexOutOfBoundsException e){
             System.out.println("Invalid index for deletion");
         }
@@ -65,25 +60,24 @@ public class Driver {
     }
     public static void list(Receiver r){
         ListCommand list = new ListCommand(r);
-        addToCmdArr(list, cmdArr, cmdCount);
+        addToCmdArr(list);
     }
 
     public static void undo(Receiver r, Stack<Command> history){
         UndoCommand undo = new UndoCommand(r, history);
-        addToCmdArr(undo, cmdArr, cmdCount);
+        addToCmdArr(undo);
     }
-    private static void addToCmdArr(Command command, Command[] cmdArr,
-                                    int cmdCount){
+    private static void addToCmdArr(Command command){
         //Try-catch block for dynamically increasing size of cmdArr when needed
         try{
-            cmdArr[cmdCount] = command;
+            Driver.cmdArr[cmdCount] = command;
             Driver.cmdCount++;
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            Command[] new_cmdArr = new Command[cmdArr.length+1];
-            System.arraycopy(cmdArr, 0, new_cmdArr, 0, cmdArr.length);
-            cmdArr = new_cmdArr;
-            cmdArr[cmdCount] = command;
+            Command[] new_cmdArr = new Command[Driver.cmdArr.length+1];
+            System.arraycopy(cmdArr, 0, new_cmdArr, 0,  Driver.cmdArr.length);
+            Driver.cmdArr = new_cmdArr;
+            Driver.cmdArr[cmdCount] = command;
             Driver.cmdCount++;
         }
     }
