@@ -18,7 +18,7 @@ public class Driver {
 //        Entry.list(r);
 //        Entry.update(r, "1", "King Kong <EMAIL>");
         Entry.update(r, "a","Gary lim garysim@gmail.com");
-//        Entry.list(r);
+        Entry.list(r);
 //        Entry.delete(r, "1");
 //        Entry.list(r);
 //        Entry.undo();
@@ -27,7 +27,7 @@ public class Driver {
 //        Entry.list(r);
 //        Entry.delete(r, 4);
 
-        r.loadFromFile();
+//        r.loadFromFile();
         invoker.setCommandsForExecution(Entry.cmdArr);
         invoker.executeCommand(Entry.history);
 //        System.out.println(Entry.history);

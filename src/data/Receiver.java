@@ -29,7 +29,7 @@ public class Receiver {
      */
     public boolean addEntry(String[] payload){
         tempDatastore.add(payload);
-        System.out.printf("Entry added: %d. ", tempDatastore.size()-1);
+        System.out.printf("Entry added: %d. ", tempDatastore.size());
         for (String s : payload) {
             System.out.printf("%s ", s);
         }
