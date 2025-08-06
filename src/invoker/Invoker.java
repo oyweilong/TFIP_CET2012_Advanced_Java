@@ -3,6 +3,10 @@ package invoker;
 import commands.Command;
 import java.util.Stack;
 
+/**
+ * Invoker class to initiate and trigger commands.
+ * Contains Command array to store list of commands to execute.
+ */
 public class Invoker {
     private Command[] cmdToExecute;
 
