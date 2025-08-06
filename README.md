@@ -1,4 +1,4 @@
-## Practicum 1
+## Advanced Java: Practicum 2
 
 ### A company wants to develop a small tool that is able to store some employee data into a file.
 This tool allows users to **add, list, update, delete** and **undo the previous instruction.**
