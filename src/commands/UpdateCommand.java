@@ -14,6 +14,8 @@ public class UpdateCommand implements Command {
     private final String[] validatedPayload;
     public boolean isUndoable = true;
 
+
+    // TODO For System.arraycopy, should we rename dest, rather than using payload again?
     public UpdateCommand(Receiver receiver, String payload)
     {
         this.receiver = receiver;
