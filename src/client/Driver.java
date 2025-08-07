@@ -42,12 +42,12 @@ public class Driver {
         list(r);
         update(r, "3 Adam");
         list(r);
-        update(r, "1 blue bell ice-cream@alaskaFields.org");
+        update(r, "1.0 blue bell ice-cream@alaskaFields.org");
         list(r);
-        delete(r, "1");
-        list(r);
-        undo(r, history);
-        list(r);
+//        delete(r, "1");
+//        list(r);
+//        undo(r, history);
+//        list(r);
 
         r.loadFromFile();
         invoker.setCommandsForExecution(Driver.cmdArr);

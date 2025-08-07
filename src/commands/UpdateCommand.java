@@ -17,10 +17,10 @@ public class UpdateCommand implements Command {
     public UpdateCommand(Receiver receiver, String payload)
     {
         this.receiver = receiver;
-        String[] payloadArr = this.parsePayload(payload);
-        this.payload = new String[payloadArr.length-1];
-        System.arraycopy(payloadArr, 1, this.payload, 0, payloadArr.length-1);
-        this.index = Integer.parseInt(payloadArr[0]) - 1;
+        String[] choppedPayload = this.parsePayload(payload);
+        this.payload = new String[choppedPayload.length-1];
+        System.arraycopy(choppedPayload, 1, this.payload, 0, choppedPayload.length-1);
+        this.index = Integer.parseInt(choppedPayload[0]) - 1;
         this.validatedPayload = new String[this.payload.length];
     }
 
@@ -61,12 +61,12 @@ public class UpdateCommand implements Command {
     public boolean execute() throws RuntimeException{
         try{
             originalPayload = receiver.tempDatastore.get(index);
-        } catch (IndexOutOfBoundsException e){
+            if(validateAndExecute(payload))
+                return receiver.updateEntry(index, validatedPayload, originalPayload);
+            else return false;
+        } catch (IndexOutOfBoundsException|NumberFormatException e){
             throw new CustomException("Update failed: Invalid index to update");
         }
-        if(validateAndExecute(payload))
-            return receiver.updateEntry(index, validatedPayload, originalPayload);
-        else return false;
     }
 
     @Override
