@@ -25,8 +25,8 @@ public interface Command {
 
     /**
      * Splits single payload string into an array of individual data items
-     * @param payload original input string
-     * @return array of data items
+     * @param payload original input parameters containing data items
+     * @return data items as an array instead
      */
     default String[] parsePayload(String payload){
         String[] payloadArr = payload.split(" ");

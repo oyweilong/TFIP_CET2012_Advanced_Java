@@ -58,7 +58,7 @@ public class Driver {
     /**
      * Method to create and configure Add Command
      * @param r receiver instance to accept commands
-     * @param payload input parameters containing data items
+     * @param payload input containing data items
      */
     public static void add(Receiver r, String payload){
         AddCommand add = new AddCommand(r, payload);
@@ -68,7 +68,7 @@ public class Driver {
     /**
      * Method to create and configure Update Command
      * @param r receiver instance to accept commands
-     * @param payload input parameters containing data items
+     * @param payload input containing data items
      */
     public static void update(Receiver r, String payload){
         try{

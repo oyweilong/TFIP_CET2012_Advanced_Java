@@ -2,17 +2,25 @@ package commands;
 
 import data.Receiver;
 import exceptions.CustomException;
-
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Concrete Command Class to implement Add Command
+ */
 public class AddCommand implements Command {
+    // ===== FIELDS =====
     private final Receiver receiver;
-    private final String[] payload;
-    private final String[] validatedPayload = new String[3];
-    public boolean isUndoable = true;
+    private final String[] payload; // original payload string array
+    private final String[] validatedPayload = new String[3]; // email validated payload string array
+    public boolean isUndoable = true; // boolean to record if command is undoable
 
+    // ===== CONSTRUCTORS =====
+    /**
+     * Constructor for Add Command
+     * @param receiver receiver instance to accept commands
+     * @param payload input containing data items
+     */
     public AddCommand(Receiver receiver, String payload){
         this.receiver = receiver;
         this.payload = this.parsePayload(payload);
@@ -47,8 +55,6 @@ public class AddCommand implements Command {
         validatedPayload[2] = email;
         return true;
     }
-
-
 
     @Override
     public boolean execute() throws CustomException{

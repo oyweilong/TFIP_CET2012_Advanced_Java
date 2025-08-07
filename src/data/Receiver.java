@@ -21,7 +21,7 @@ public class Receiver {
 
     /**
      * Default method to Add New Entry into dataStore, is undoable
-     * @param payload input variables containing data items
+     * @param payload input containing data items
      * @return true for undoable Command
      */
     public boolean addEntry(String[] payload){
@@ -37,7 +37,7 @@ public class Receiver {
     /**
      *  Specific method to Add New Entry, only for .undo() in DeleteCommand() & UpdateCommand()
      * @param index for referencing to which specific data items to undo
-     * @param payload variable to contain data via inputs
+     * @param payload input containing data items
      */
     public void addEntry(int index, String[] payload){
         tempDatastore.add(index, payload);
