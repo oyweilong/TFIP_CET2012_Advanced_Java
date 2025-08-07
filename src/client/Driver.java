@@ -44,7 +44,7 @@ public class Driver {
         list(r);
         update(r, "1 blue bell ice-cream@alaskaFields.org");
         list(r);
-        delete(r, "1");
+        delete(r, "1ad");
         list(r);
         undo(r, history);
         list(r);

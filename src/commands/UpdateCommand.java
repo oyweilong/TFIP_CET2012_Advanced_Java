@@ -70,8 +70,11 @@ public class UpdateCommand implements Command {
     public boolean execute() throws RuntimeException{
         try{
             originalPayload = receiver.tempDatastore.get(index);
-            if(validateAndExecute(payload))
+            if(validateAndExecute(payload)){
+                System.out.println("update");
                 return receiver.updateEntry(index, validatedPayload, originalPayload);
+            }
+
             else return false;
         } catch (IndexOutOfBoundsException|NumberFormatException e){
             throw new CustomException("Update failed: Invalid index to update");

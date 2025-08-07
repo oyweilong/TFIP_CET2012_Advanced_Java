@@ -44,7 +44,6 @@ public class AddCommand implements Command {
 
         String firstName = toTitlecase(payloadArr[0]);
         String lastName = toTitlecase(payloadArr[1]);
-        String email = payloadArr[2];
 
         Pattern p1 = Pattern.compile("@+");
         Pattern p2 = Pattern.compile("\\w+");
@@ -71,8 +70,10 @@ public class AddCommand implements Command {
 
     @Override
     public boolean execute() throws CustomException{
-        if (validateAndExecute(payload))
+        if (validateAndExecute(payload)){
+            System.out.println("add");
             return receiver.addEntry(validatedPayload);
+        }
         else return false;
     }
 

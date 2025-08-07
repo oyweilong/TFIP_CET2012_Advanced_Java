@@ -26,7 +26,6 @@ public class Receiver {
      */
     public boolean addEntry(String[] payload){
         tempDatastore.add(payload);
-        System.out.println("add");
         return true;
     }
 
@@ -74,7 +73,6 @@ public class Receiver {
         }
 
         tempDatastore.set(index, updatedPayload);
-        System.out.println("update");
         return true;
         }
 
@@ -91,7 +89,6 @@ public class Receiver {
         try {
             String[] deletedPayload = tempDatastore.get(index);
             tempDatastore.remove(index);
-            System.out.println("Delete");
             return true;
         }
         catch (IndexOutOfBoundsException e){
