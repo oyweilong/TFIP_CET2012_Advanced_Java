@@ -29,10 +29,10 @@ public class UpdateCommand implements Command {
         // Layer 1: Check the number of payloads
         if (payloadArr.length ==0 || payloadArr.length > 3) {
             throw new CustomException("Invalid Update command. \n" +
-                    "Update command format: <firstName> <lastName> <email>,\n"+
-                    "<firstName> <lastName>,\n" +
-                    "<firstName>\n" +
-                    "Example: John Doe john@example.com");
+                    "Update command format: <index> <firstName> <lastName> <email>,\n"+
+                    "<index> <firstName> <lastName>,\n" +
+                    "<index> <firstName>\n" +
+                    "Example: 1 John Doe john@example.com");
         }
         //set the first name and last name to Titlecase
         switch (payloadArr.length){
