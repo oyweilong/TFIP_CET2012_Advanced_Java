@@ -73,6 +73,8 @@ public class Receiver {
     public void list(){
         System.out.println("List");
         for (String[] entry : tempDatastore) {
+            // Format index to have at least 2 digits, padding with leading zeros.
+            // Using %0Nd, where N is minimum number of digits, i.e. N =2
             System.out.printf("%02d. ", tempDatastore.indexOf(entry) + 1);
             for (String s : entry) {
                 System.out.printf("%s ", s);
