@@ -29,10 +29,9 @@ public class AddCommand implements Command {
     /**
      *  Validation method for Add Command, checking number of data items and email format.
      * @param payloadArr String array of original payload.
-     * @return returns validated string array of payload.
      * @throws CustomException thrown if missing data items or invalid email format.
      */
-    public boolean validateAndExecute(String[] payloadArr) throws CustomException{
+    public void validateAndExecute(String[] payloadArr) throws CustomException{
         // Layer 1: Check the number of data items from payload
         if (payloadArr.length != 3) {
             throw new CustomException("Invalid Add command. Add command " +
@@ -42,8 +41,8 @@ public class AddCommand implements Command {
                     "Example: add John Doe john@example.com");
         }
 
-        String firstName = toTitlecase(payloadArr[0]);
-        String lastName = toTitlecase(payloadArr[1]);
+        validatedPayload[0] = toTitlecase(payloadArr[0]);
+        validatedPayload[1] = toTitlecase(payloadArr[1]);
 
         Pattern p1 = Pattern.compile("@+");
         Pattern p2 = Pattern.compile("\\w+");
@@ -54,27 +53,24 @@ public class AddCommand implements Command {
             Pattern p3 = Pattern.compile(
                     "^\\w(\\w|[.-](?![.-]))+\\w@[\\w^_]" +
                             "([\\w^_]|([.-](?![.-])))+[\\w^_]\\.[a-z]{2,3}");
-            Matcher m = p3.matcher(payloadArr[2]);
-            if (!m.matches()) {
+            Matcher m3 = p3.matcher(payloadArr[2]);
+            if (!m3.matches()) {
                 throw new CustomException("Invalid email format");
             }
             else validatedPayload[2] = payloadArr[2];
         } else if (m2.find()){
             validatedPayload[2] = toTitlecase(payloadArr[2]);
         }
-
-        validatedPayload[0] = firstName;
-        validatedPayload[1] = lastName;
-        return true;
+        else
+            throw new CustomException("Invalid email format");
     }
 
     @Override
     public boolean execute() throws CustomException{
-        if (validateAndExecute(payload)){
-            System.out.println("add");
-            return receiver.addEntry(validatedPayload);
-        }
-        else return false;
+        validateAndExecute(payload);
+        receiver.addEntry(receiver.tempDatastore.size(), validatedPayload);
+        System.out.println("add");
+        return true;
     }
 
    @Override

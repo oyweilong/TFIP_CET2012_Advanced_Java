@@ -25,7 +25,7 @@ public class UpdateCommand implements Command {
     }
 
     // Validation for UPDATE command
-    public boolean validateAndExecute(String[] payloadArr) throws CustomException {
+    public void validateAndExecute(String[] payloadArr) throws CustomException {
         // Layer 1: Check the number of payloads
         if (payloadArr.length ==0 || payloadArr.length > 3) {
             throw new CustomException("Invalid Update command. \n" +
@@ -33,26 +33,6 @@ public class UpdateCommand implements Command {
                     "<firstName> <lastName>,\n" +
                     "<firstName>\n" +
                     "Example: John Doe john@example.com");
-        }
-        //Layer 2: Email validation
-        if (payloadArr.length == 3) {
-            Pattern p1 = Pattern.compile("@+");
-            Pattern p2 = Pattern.compile("\\w+");
-            Matcher m1 = p1.matcher(payloadArr[2]);
-            Matcher m2 = p2.matcher(payloadArr[2]);
-            if (m1.find()){
-                Pattern p3 = Pattern.compile(
-                        "^\\w(\\w|[.-](?![.-]))+\\w@[\\w^_]" +
-                                "([\\w^_]|([.-](?![.-])))+[\\w^_]\\.[a-z]{2,3}");
-                Matcher m = p3.matcher(payloadArr[2]);
-                if (!m.matches()) {
-                    throw new CustomException("Invalid email format");
-                }
-                else validatedPayload[2] = payloadArr[2];
-            } else if (m2.find()){
-                validatedPayload[2] = toTitlecase(payloadArr[2]);
-            }
-
         }
         //set the first name and last name to Titlecase
         switch (payloadArr.length){
@@ -64,18 +44,36 @@ public class UpdateCommand implements Command {
                 validatedPayload[1] = toTitlecase(payloadArr[1]);
                 break;
         }
-        return true;
+        //Layer 2: Email validation
+        if (payloadArr.length == 3) {
+            Pattern p1 = Pattern.compile("@+");
+            Pattern p2 = Pattern.compile("\\w+");
+            Matcher m1 = p1.matcher(payloadArr[2]);
+            Matcher m2 = p2.matcher(payloadArr[2]);
+            if (m1.find()){
+                Pattern p3 = Pattern.compile(
+                        "^\\w(\\w|[.-](?![.-]))+\\w@[\\w^_]" +
+                                "([\\w^_]|([.-](?![.-])))+[\\w^_]\\.[a-z]{2,3}");
+                Matcher m3 = p3.matcher(payloadArr[2]);
+                if (!m3.matches()) {
+                    throw new CustomException("Invalid email format");
+                }
+                else validatedPayload[2] = payloadArr[2];
+            } else if (m2.find()){
+                validatedPayload[2] = toTitlecase(payloadArr[2]);
+            }
+            else
+                throw new CustomException("Invalid email format");
+        }
     }
     @Override
     public boolean execute() throws RuntimeException{
         try{
             originalPayload = receiver.tempDatastore.get(index);
-            if(validateAndExecute(payload)){
-                System.out.println("update");
-                return receiver.updateEntry(index, validatedPayload, originalPayload);
-            }
-
-            else return false;
+            validateAndExecute(payload);
+            receiver.updateEntry(index, validatedPayload, originalPayload);
+            System.out.println("update");
+            return true;
         } catch (IndexOutOfBoundsException|NumberFormatException e){
             throw new CustomException("Update failed: Invalid index to update");
         }

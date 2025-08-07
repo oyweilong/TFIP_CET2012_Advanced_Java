@@ -10,7 +10,7 @@ import java.util.Stack;
  * Creates and configures command objects, passing command parameters.
  */
 public class Driver {
-    static int cmdCount = 0;
+    public static int cmdCount = 0;
     static Command[] cmdArr= new Command[1];
 
     /**
@@ -35,19 +35,20 @@ public class Driver {
 //        undo(r, history);
 //        list(r);
 
-        add (r, "First_name Last_name Email");
+        add (r, "First_name Last_name #$$%%#");
         add (r, "John Doe simple@example.com");
+        delete(r, "wqdwqd2");
         add (r, "Hanna Moon tetter.tots@potatoesarelife.com");
         add (r, "Ah Boon green-tea@teaforlife.com");
         list(r);
-        update(r, "3 Adam");
+        update(r, "2 .");
         list(r);
-        update(r, "1 blue bell ice-cream@alaskaFields.org");
-        list(r);
-        delete(r, "1ad");
-        list(r);
-        undo(r, history);
-        list(r);
+//        update(r, "1 blue bell ice-cream@alaskaFields.org");
+//        list(r);
+//        delete(r, "1ad");
+//        list(r);
+//        undo(r, history);
+//        list(r);
 
         r.loadFromFile();
         invoker.setCommandsForExecution(Driver.cmdArr);
@@ -88,7 +89,7 @@ public class Driver {
         try{
             DeleteCommand delete = new DeleteCommand(r, index);
             addToCmdArr(delete);
-        } catch(NumberFormatException | ArrayIndexOutOfBoundsException e){
+        } catch(NumberFormatException e){
             System.out.println("Invalid index for deletion");
         }
     }
@@ -130,5 +131,4 @@ public class Driver {
             Driver.cmdCount++;
         }
     }
-
 }

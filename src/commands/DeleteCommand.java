@@ -19,9 +19,10 @@ public class DeleteCommand implements Command {
         try{
             deletedPayload = receiver.tempDatastore.get(index);
             System.out.println("Delete");
-            return receiver.deleteEntry(index);
+            receiver.deleteEntry(index);
+            return true;
         } catch (IndexOutOfBoundsException e){
-            throw new CustomException("Delete failed: Invalid index for deletion");
+            throw new CustomException("Invalid index for deletion");
         }
     }
     @Override

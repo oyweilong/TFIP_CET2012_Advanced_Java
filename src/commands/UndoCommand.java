@@ -18,7 +18,6 @@ public class UndoCommand implements Command {
 
     @Override
     public boolean execute() throws EmptyStackException{
-
         try{
             //Cleaning history of Commands that are not undoable
             for (int i = 0; i < history.size(); i++) {

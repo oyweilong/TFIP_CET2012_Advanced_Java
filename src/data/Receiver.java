@@ -20,17 +20,8 @@ public class Receiver {
     public static String FILE_PATH = "src/dataStore.txt";
 
     /**
-     * Default method to Add New Entry into dataStore, is undoable
-     * @param payload input containing data items
-     * @return true for undoable Command
-     */
-    public boolean addEntry(String[] payload){
-        tempDatastore.add(payload);
-        return true;
-    }
-
-    /**
-     *  Specific method to Add New Entry, only for .undo() in DeleteCommand() & UpdateCommand()
+     *  Default method to Add New Entry, also used for .undo() in
+     *  DeleteCommand() & UpdateCommand()
      * @param index for referencing to which specific data items to undo
      * @param payload input containing data items
      */
@@ -43,58 +34,37 @@ public class Receiver {
      * @param index for referencing to which specific line of data items to undo
      * @param payloadArr new array of data items to update existing data items
      * @param originalPayload array of existing data items
-     * @return true for undoable Command
      */
-    public boolean updateEntry(int index, String[] payloadArr,
-                               String[] originalPayload) {
-        if (tempDatastore.isEmpty()) {
-            System.out.println("No entries to update");
-            return false;
+    public void updateEntry(int index, String[] payloadArr,
+                               String[] originalPayload)
+        {
+            String[] updatedPayload = new String[3];
+            switch(payloadArr.length){
+                case 1:
+                    updatedPayload[0] = payloadArr[0];
+                    updatedPayload[1] = originalPayload[1];
+                    updatedPayload[2] = originalPayload[2];
+                    break;
+                case 2:
+                    updatedPayload[0] = payloadArr[0];
+                    updatedPayload[1] = payloadArr[1];
+                    updatedPayload[2] = originalPayload[2];
+                    break;
+                case 3:
+                    updatedPayload[0] = payloadArr[0];
+                    updatedPayload[1] = payloadArr[1];
+                    updatedPayload[2] = payloadArr[2];
+                    break;
         }
-
-
-        String[] updatedPayload = new String[3];
-        switch(payloadArr.length){
-            case 1:
-                updatedPayload[0] = payloadArr[0];
-                updatedPayload[1] = originalPayload[1];
-                updatedPayload[2] = originalPayload[2];
-                break;
-            case 2:
-                updatedPayload[0] = payloadArr[0];
-                updatedPayload[1] = payloadArr[1];
-                updatedPayload[2] = originalPayload[2];
-                break;
-            case 3:
-                updatedPayload[0] = payloadArr[0];
-                updatedPayload[1] = payloadArr[1];
-                updatedPayload[2] = payloadArr[2];
-                break;
-        }
-
         tempDatastore.set(index, updatedPayload);
-        return true;
         }
 
     /**
      * Method to delete Entry, is undoable
      * @param index for referencing to which specific line of data items to delete
-     * @return true for undoable command, false if index out of array bounds
      */
-    public boolean deleteEntry(int index){
-        if (tempDatastore.isEmpty()){
-            System.out.println("No entries to delete");
-            return false;
-        }
-        try {
-            String[] deletedPayload = tempDatastore.get(index);
-            tempDatastore.remove(index);
-            return true;
-        }
-        catch (IndexOutOfBoundsException e){
-            System.out.println("Index out of bounds");
-            return false;
-        }
+    public void deleteEntry(int index){
+        tempDatastore.remove(index);
     }
 
     /**
