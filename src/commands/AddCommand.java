@@ -35,8 +35,8 @@ public class AddCommand implements Command {
 
         //Layer 2: Email validation
         Pattern p = Pattern.compile(
-                "^\\w(\\w|[.-](?![.-]))+\\w@[A-Za-z0-9]" +
-                        "([A-Za-z0-9]|([.-](?![.-])))+[A-Za-z0-9]\\.[a-z]{2,3}");
+                "^\\w(\\w|[.-](?![.-]))+\\w@[\\w^_]" +
+                        "([\\w^_]|([.-](?![.-])))+[\\w^_]\\.[a-z]{2,3}");
         Matcher m = p.matcher(email);
         if (!m.matches()) {
             throw new CustomException("Invalid email format");
