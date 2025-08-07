@@ -14,11 +14,13 @@ public class UpdateCommand implements Command {
     private final String[] validatedPayload;
     public boolean isUndoable = true;
 
-    public UpdateCommand(Receiver receiver, String index, String payload)
+    public UpdateCommand(Receiver receiver, String payload)
     {
         this.receiver = receiver;
-        this.index = Integer.parseInt(index) - 1;
-        this.payload = parsePayload(payload);
+        String[] payloadArr = this.parsePayload(payload);
+        this.payload = new String[payloadArr.length-1];
+        System.arraycopy(payloadArr, 1, this.payload, 0, payloadArr.length-1);
+        this.index = Integer.parseInt(payloadArr[0]) - 1;
         this.validatedPayload = new String[this.payload.length];
     }
 

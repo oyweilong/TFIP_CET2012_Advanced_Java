@@ -40,9 +40,9 @@ public class Driver {
         add (r, "Hanna Moon tetter.tots@potatoesarelife.com");
         add (r, "Ah Boon green-tea@teaforlife.com");
         list(r);
-        update(r, "3", "Adam");
+        update(r, "3 Adam");
         list(r);
-        update(r, "1", "blue bell ice-cream@alaskaFields.org");
+        update(r, "1 blue bell ice-cream@alaskaFields.org");
         list(r);
         delete(r, "1");
         list(r);
@@ -65,9 +65,9 @@ public class Driver {
         addToCmdArr(add);
     }
 
-    public static void update(Receiver r, String index, String payload){
+    public static void update(Receiver r, String payload){
         try{
-            UpdateCommand update = new UpdateCommand(r, index, payload);
+            UpdateCommand update = new UpdateCommand(r, payload);
             addToCmdArr(update);
         } catch(NumberFormatException e){
             System.out.println("Invalid index for update");

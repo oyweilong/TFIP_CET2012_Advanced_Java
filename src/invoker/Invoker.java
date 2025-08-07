@@ -29,15 +29,11 @@ public class Invoker {
      */
     public void executeCommand(Stack<Command> history){
         for(Command cmd : cmdToExecute){
-            boolean cmdSuccess = false;
             try{
                 if(cmd.execute())
-                    cmdSuccess = true;
+                    history.push(cmd);
             } catch (CustomException e) {
                 System.out.println(e.getMessage());
-            } finally{
-                if (cmdSuccess)
-                    history.push(cmd);
             }
         }
     }
