@@ -35,9 +35,8 @@ public class UpdateCommand implements Command {
         //Layer 2: Email validation
         if (payloadArr.length == 3) {
             Pattern p = Pattern.compile(
-                    "^[A-Za-z0-9_]([A-Za-z0-9_]|[.-](?![.-]))" +
-                            "+[A-Za-z0-9_]@[A-Za-z0-9]" +
-                            "([A-Za-z0-9]|([.-](?![.-])))+[A-Za-z0-9]\\.[a-z]{2,3}");
+                    "^\\w(\\w|[.-](?![.-]))+\\w@[A-Za-z0-9]" +
+                        "([A-Za-z0-9]|([.-](?![.-])))+[A-Za-z0-9]\\.[a-z]{2,3}");
             Matcher m = p.matcher(payloadArr[2]);
             if (!m.matches()) {
                 throw new CustomException("Invalid email format");
