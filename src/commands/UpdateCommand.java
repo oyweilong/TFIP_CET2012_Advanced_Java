@@ -35,6 +35,8 @@ public class UpdateCommand implements Command {
                     "<index> <firstName> <lastName>,\n" +
                     "<index> <firstName>\n" +
                     "Example: 1 John Doe john@example.com");
+            // text block only compatible with Java 15 onwards
+            // program required backward compatibility up to Java 8
         }
         //set the first name and last name to Titlecase
         switch (payloadArr.length){
