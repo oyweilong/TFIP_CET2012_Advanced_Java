@@ -26,11 +26,7 @@ public class Receiver {
      */
     public boolean addEntry(String[] payload){
         tempDatastore.add(payload);
-        System.out.printf("Entry added: %d. ", tempDatastore.size());
-        for (String s : payload) {
-            System.out.printf("%s ", s);
-        }
-        System.out.println();
+        System.out.println("add");
         return true;
     }
 
@@ -78,11 +74,7 @@ public class Receiver {
         }
 
         tempDatastore.set(index, updatedPayload);
-        System.out.printf("Entry updated: %d. ", index+1);
-        for (String s : updatedPayload) {
-            System.out.printf("%s ", s);
-        }
-        System.out.println();
+        System.out.println("update");
         return true;
         }
 
@@ -99,11 +91,7 @@ public class Receiver {
         try {
             String[] deletedPayload = tempDatastore.get(index);
             tempDatastore.remove(index);
-            System.out.printf("Entry deleted: %d. ", index+1);
-            for (String s : deletedPayload) {
-                System.out.printf("%s ", s);
-            }
-            System.out.println();
+            System.out.println("Delete");
             return true;
         }
         catch (IndexOutOfBoundsException e){
@@ -118,7 +106,7 @@ public class Receiver {
     public void list(){
         System.out.println("List");
         for (String[] entry : tempDatastore) {
-            System.out.printf("%d. ", tempDatastore.indexOf(entry) + 1);
+            System.out.printf("%02d. ", tempDatastore.indexOf(entry) + 1);
             for (String s : entry) {
                 System.out.printf("%s ", s);
             }

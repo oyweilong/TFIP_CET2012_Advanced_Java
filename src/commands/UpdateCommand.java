@@ -36,14 +36,23 @@ public class UpdateCommand implements Command {
         }
         //Layer 2: Email validation
         if (payloadArr.length == 3) {
-            Pattern p = Pattern.compile(
-                    "^\\w(\\w|[.-](?![.-]))+\\w@[\\w^_]" +
-                            "([\\w^_]|([.-](?![.-])))+[\\w^_]\\.[a-z]{2,3}");
-            Matcher m = p.matcher(payloadArr[2]);
-            if (!m.matches()) {
-                throw new CustomException("Invalid email format");
+            Pattern p1 = Pattern.compile("@+");
+            Pattern p2 = Pattern.compile("\\w+");
+            Matcher m1 = p1.matcher(payloadArr[2]);
+            Matcher m2 = p2.matcher(payloadArr[2]);
+            if (m1.find()){
+                Pattern p3 = Pattern.compile(
+                        "^\\w(\\w|[.-](?![.-]))+\\w@[\\w^_]" +
+                                "([\\w^_]|([.-](?![.-])))+[\\w^_]\\.[a-z]{2,3}");
+                Matcher m = p3.matcher(payloadArr[2]);
+                if (!m.matches()) {
+                    throw new CustomException("Invalid email format");
+                }
+                else validatedPayload[2] = payloadArr[2];
+            } else if (m2.find()){
+                validatedPayload[2] = toTitlecase(payloadArr[2]);
             }
-            else validatedPayload[2] = payloadArr[2];
+
         }
         //set the first name and last name to Titlecase
         switch (payloadArr.length){

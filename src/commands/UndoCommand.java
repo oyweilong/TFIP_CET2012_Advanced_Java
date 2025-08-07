@@ -26,6 +26,7 @@ public class UndoCommand implements Command {
                     history.remove(i);
             }
             history.pop().undo();
+            System.out.println("Undo");
             return false;
         } catch (EmptyStackException e){
             throw new CustomException("No commands to undo");

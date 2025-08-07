@@ -46,18 +46,26 @@ public class AddCommand implements Command {
         String lastName = toTitlecase(payloadArr[1]);
         String email = payloadArr[2];
 
-        //Layer 2: Email validation
-        Pattern p = Pattern.compile(
-                "^\\w(\\w|[.-](?![.-]))+\\w@[\\w^_]" +
-                        "([\\w^_]|([.-](?![.-])))+[\\w^_]\\.[a-z]{2,3}");
-        Matcher m = p.matcher(email);
-        if (!m.matches()) {
-            throw new CustomException("Invalid email format");
+        Pattern p1 = Pattern.compile("@+");
+        Pattern p2 = Pattern.compile("\\w+");
+        Matcher m1 = p1.matcher(payloadArr[2]);
+        Matcher m2 = p2.matcher(payloadArr[2]);
+        if (m1.find()){
+            //Layer 2: Email validation
+            Pattern p3 = Pattern.compile(
+                    "^\\w(\\w|[.-](?![.-]))+\\w@[\\w^_]" +
+                            "([\\w^_]|([.-](?![.-])))+[\\w^_]\\.[a-z]{2,3}");
+            Matcher m = p3.matcher(payloadArr[2]);
+            if (!m.matches()) {
+                throw new CustomException("Invalid email format");
+            }
+            else validatedPayload[2] = payloadArr[2];
+        } else if (m2.find()){
+            validatedPayload[2] = toTitlecase(payloadArr[2]);
         }
 
         validatedPayload[0] = firstName;
         validatedPayload[1] = lastName;
-        validatedPayload[2] = email;
         return true;
     }
 
