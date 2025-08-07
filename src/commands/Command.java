@@ -3,7 +3,6 @@ package commands;
 public interface Command {
     boolean execute() throws RuntimeException;
     boolean checkUndoable();
-    String checkCmdType();
     default void undo(){}
     default String[] parsePayload(String payload){
         String[] payloadArr = payload.split(" ");

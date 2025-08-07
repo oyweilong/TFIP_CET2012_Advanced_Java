@@ -1,6 +1,7 @@
 package commands;
 
 import data.Receiver;
+import exceptions.CustomException;
 
 
 public class DeleteCommand implements Command {
@@ -8,7 +9,6 @@ public class DeleteCommand implements Command {
     private final Receiver receiver;
     private String[] deletedPayload;
     public boolean isUndoable = true;
-    public String cmdType = "Delete";
 
     public DeleteCommand(Receiver receiver, String index){
         this.receiver = receiver;
@@ -16,8 +16,12 @@ public class DeleteCommand implements Command {
     }
     @Override
     public boolean execute() throws IndexOutOfBoundsException{
-        deletedPayload = receiver.tempDatastore.get(index);
-        return receiver.deleteEntry(index);
+        try{
+            deletedPayload = receiver.tempDatastore.get(index);
+            return receiver.deleteEntry(index);
+        } catch (IndexOutOfBoundsException e){
+            throw new CustomException("Delete failed: Invalid index for deletion");
+        }
     }
     @Override
     public void undo(){
@@ -27,10 +31,5 @@ public class DeleteCommand implements Command {
     @Override
     public boolean checkUndoable(){
         return isUndoable;
-    }
-
-    @Override
-    public String checkCmdType(){
-        return cmdType;
     }
 }

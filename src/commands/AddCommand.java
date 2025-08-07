@@ -12,8 +12,6 @@ public class AddCommand implements Command {
     private final String[] payload;
     private final String[] validatedPayload = new String[3];
     public boolean isUndoable = true;
-    public String cmdType = "Add";
-
 
     public AddCommand(Receiver receiver, String payload){
         this.receiver = receiver;
@@ -24,7 +22,6 @@ public class AddCommand implements Command {
     public boolean validateAndExecute(String[] payloadArr) throws CustomException{
         // Layer 1: Check the number of payloads
         if (payloadArr.length != 3) {
-
             throw new CustomException("Invalid Add command. Add command " +
                     "format: " +
                     "<firstName> " +
@@ -69,10 +66,5 @@ public class AddCommand implements Command {
     @Override
     public boolean checkUndoable(){
         return isUndoable;
-    }
-
-    @Override
-    public String checkCmdType(){
-        return cmdType;
     }
 }

@@ -13,7 +13,6 @@ public class UpdateCommand implements Command {
     private String[] originalPayload;
     private final String[] validatedPayload;
     public boolean isUndoable = true;
-    public String cmdType = "Update";
 
     public UpdateCommand(Receiver receiver, String index, String payload)
     {
@@ -59,7 +58,11 @@ public class UpdateCommand implements Command {
     }
     @Override
     public boolean execute() throws RuntimeException{
-        originalPayload = receiver.tempDatastore.get(index);
+        try{
+            originalPayload = receiver.tempDatastore.get(index);
+        } catch (IndexOutOfBoundsException e){
+            throw new CustomException("Update failed: Invalid index to update");
+        }
         if(validateAndExecute(payload))
             return receiver.updateEntry(index, validatedPayload, originalPayload);
         else return false;
@@ -74,10 +77,5 @@ public class UpdateCommand implements Command {
     @Override
     public boolean checkUndoable(){
         return isUndoable;
-    }
-
-    @Override
-    public String checkCmdType(){
-        return cmdType;
     }
 }

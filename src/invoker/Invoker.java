@@ -1,6 +1,8 @@
 package invoker;
 
 import commands.Command;
+import exceptions.CustomException;
+
 import java.util.Stack;
 
 /**
@@ -18,20 +20,8 @@ public class Invoker {
             try{
                 if(cmd.execute())
                     cmdSuccess = true;
-            } catch (RuntimeException e) {
-                switch (e.getClass().getSimpleName()){
-                    case "CustomException":
-                        System.out.println(e.getMessage());
-                        break;
-                    case "EmptyStackException":
-                        System.out.println("No commands to undo");
-                        break;
-                    case "IndexOutOfBoundsException":
-                        if (cmd.checkCmdType().equals("Delete"))
-                            System.out.println("Delete failed: Invalid index for deletion");
-                        else if (cmd.checkCmdType().equals("Update"))
-                            System.out.println("Update failed: Invalid index to update");
-                }
+            } catch (CustomException e) {
+                System.out.println(e.getMessage());
             } finally{
                 if (cmdSuccess)
                     history.push(cmd);

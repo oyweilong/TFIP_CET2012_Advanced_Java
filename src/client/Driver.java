@@ -17,14 +17,28 @@ public class Driver {
 
        //Client execution
 
-        add(r, "Jane Lai .jane_lai@gmail.com");
-        add(r, "King koNg king__.kong@gmail.com");
-        add(r, "Sam peReZ _.sam-perez._@gmail.com");
-        update(r, "1","Gary lim garysim@gmail.com");
+//        add(r, "Jane Lai .jane_lai@gmail.com");
+//        add(r, "King koNg king__.kong@gmail.com");
+//        add(r, "Sam peReZ _.sam-perez._@gmail.com");
+//        update(r, "1","Gary lim garysim@gmail.com");
+//        list(r);
+//        delete(r, "5");
+//        Command cmd = new ListCommand(r);
+//        history.push(cmd);
+//        undo(r, history);
+//        list(r);
+
+        add (r, "First_name Last_name <EMAIL>");
+        add (r, "John Doe simple@example.com");
+        add (r, "Hanna Moon tetter.tots@potatoesarelife.com");
+        add (r, "Ah Boon green-tea@teaforlife.com");
         list(r);
-        delete(r, "5");
-        Command cmd = new ListCommand(r);
-        history.push(cmd);
+        update(r, "3", "Adam");
+        list(r);
+        update(r, "1", "blue bell ice-cream@alaskaFields.org");
+        list(r);
+        delete(r, "1");
+        list(r);
         undo(r, history);
         list(r);
 
