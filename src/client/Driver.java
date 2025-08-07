@@ -57,14 +57,19 @@ public class Driver {
 
     /**
      * Method to create and configure Add Command
-     * @param r receiver instance
-     * @param payload
+     * @param r receiver instance to accept commands
+     * @param payload input parameters containing data items
      */
     public static void add(Receiver r, String payload){
         AddCommand add = new AddCommand(r, payload);
         addToCmdArr(add);
     }
 
+    /**
+     * Method to create and configure Update Command
+     * @param r receiver instance to accept commands
+     * @param payload input parameters containing data items
+     */
     public static void update(Receiver r, String payload){
         try{
             UpdateCommand update = new UpdateCommand(r, payload);
@@ -74,6 +79,11 @@ public class Driver {
         }
     }
 
+    /**
+     * Method to create and configure Delete Command
+     * @param r receiver instance to accept commands
+     * @param index input index to determine which line of data item to delete
+     */
     public static void delete(Receiver r, String index){
         try{
             DeleteCommand delete = new DeleteCommand(r, index);
@@ -81,17 +91,31 @@ public class Driver {
         } catch(NumberFormatException | ArrayIndexOutOfBoundsException e){
             System.out.println("Invalid index for deletion");
         }
-
     }
+
+    /**
+     * Method to create and configure List Command
+     * @param r receiver instance to accept commands
+     */
     public static void list(Receiver r){
         ListCommand list = new ListCommand(r);
         addToCmdArr(list);
     }
 
+    /**
+     * Method to create and configure Undo Command
+     * @param r receiver instance to accept commands
+     * @param history record of Stack<Command> to track which command to undo
+     */
     public static void undo(Receiver r, Stack<Command> history){
         UndoCommand undo = new UndoCommand(r, history);
         addToCmdArr(undo);
     }
+
+    /**
+     * Method to increase size of Command Array cmdArr when required
+     * @param command to add called commands into Command Array cmdArr
+     */
     private static void addToCmdArr(Command command){
         //Try-catch block for dynamically increasing size of cmdArr when needed
         try{

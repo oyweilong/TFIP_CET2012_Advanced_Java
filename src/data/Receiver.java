@@ -1,8 +1,6 @@
 package data;
 
-//import commands.Command;
 import exceptions.CustomException;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,9 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 /**
- * Receiver class to perform operations when receive commands
+ * Receiver class to perform operations when received commands
  * tempDatastore to temporarily store array list of data items
  * FIlE_PATH to store Relative Path for storing and loading dataStore text file
  */
@@ -23,8 +20,8 @@ public class Receiver {
     public static String FILE_PATH = "src/dataStore.txt";
 
     /**
-     * Default method to Add New Entry into dataStore, undoable
-     * @param payload variable to contain data items via inputs
+     * Default method to Add New Entry into dataStore, is undoable
+     * @param payload input variables containing data items
      * @return true for undoable Command
      */
     public boolean addEntry(String[] payload){
@@ -90,7 +87,7 @@ public class Receiver {
         }
 
     /**
-     * Method to delete Entry, undoable
+     * Method to delete Entry, is undoable
      * @param index for referencing to which specific line of data items to delete
      * @return true for undoable command, false if index out of array bounds
      */
