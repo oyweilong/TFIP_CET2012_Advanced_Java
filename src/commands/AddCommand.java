@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class AddCommand implements Command {
     // ===== FIELDS =====
     private final Receiver receiver;
-    private final String[] payload; // original payload string array
+    private final String[] payload; // string array of original payload
     private final String[] validatedPayload = new String[3]; // email validated payload string array
     public boolean isUndoable = true; // boolean to record if command is undoable
 
@@ -26,9 +26,14 @@ public class AddCommand implements Command {
         this.payload = this.parsePayload(payload);
     }
 
-    // Validation for ADD command
+    /**
+     *  Validation method for Add Command, checking number of data items and email format.
+     * @param payloadArr String array of original payload.
+     * @return returns validated string array of payload.
+     * @throws CustomException thrown if missing data items or invalid email format.
+     */
     public boolean validateAndExecute(String[] payloadArr) throws CustomException{
-        // Layer 1: Check the number of payloads
+        // Layer 1: Check the number of data items from payload
         if (payloadArr.length != 3) {
             throw new CustomException("Invalid Add command. Add command " +
                     "format: " +
