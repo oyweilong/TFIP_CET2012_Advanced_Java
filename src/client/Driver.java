@@ -6,10 +6,18 @@ import invoker.Invoker;
 
 import java.util.Stack;
 
+/**
+ * Client/Driver class. Main class to handle inputs.
+ * Creates and configures command objects, passing command parameters.
+ */
 public class Driver {
     static int cmdCount = 0;
     static Command[] cmdArr= new Command[1];
 
+    /**
+     * Main method
+     * @param args
+     */
     public static void main(String[] args) {
        Invoker invoker = new Invoker();
        Receiver r = new Receiver();
@@ -42,7 +50,7 @@ public class Driver {
         undo(r, history);
         list(r);
 
-//        r.loadFromFile();
+        r.loadFromFile();
         invoker.setCommandsForExecution(Driver.cmdArr);
         invoker.executeCommand(history);
         r.storeToFile();

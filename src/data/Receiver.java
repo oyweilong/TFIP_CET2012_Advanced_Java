@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Receiver class to perform operations when receive commands
  * tempDatastore to temporarily store array list of data items
- * FIlE_PATH to store Relative Path for storing and loading dataStore text fileƒ
+ * FIlE_PATH to store Relative Path for storing and loading dataStore text file
  */
 public class Receiver {
     public ArrayList<String[]> tempDatastore = new ArrayList<>();
