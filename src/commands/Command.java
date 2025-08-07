@@ -18,12 +18,6 @@ public interface Command {
     boolean checkUndoable();
 
     /**
-     * Returns the type of command
-     * @return command type
-     */
-    String checkCmdType();
-
-    /**
      * Undoes command. Default is no action.
      */
     default void undo(){
