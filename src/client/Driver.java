@@ -3,7 +3,6 @@ package client;
 import commands.*;
 import data.Receiver;
 import invoker.Invoker;
-
 import java.util.Stack;
 
 /**
@@ -15,8 +14,8 @@ public class Driver {
     static Command[] cmdArr= new Command[1];
 
     /**
-     * Main method
-     * @param args
+     * Main method to receive inputs and run
+     * @param args to receive input payload
      */
     public static void main(String[] args) {
        Invoker invoker = new Invoker();
@@ -54,8 +53,13 @@ public class Driver {
         invoker.setCommandsForExecution(Driver.cmdArr);
         invoker.executeCommand(history);
         r.storeToFile();
-
     }
+
+    /**
+     * Method to create and configure Add Command
+     * @param r receiver instance
+     * @param payload
+     */
     public static void add(Receiver r, String payload){
         AddCommand add = new AddCommand(r, payload);
         addToCmdArr(add);
