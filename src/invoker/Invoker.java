@@ -10,10 +10,23 @@ import java.util.Stack;
  * Contains Command[] to manage command execution and history.
  */
 public class Invoker {
+    /**
+     * Array of commands to be executed in sequence
+     */
     private Command[] cmdToExecute;
+
+    /**
+     * Sets the array of commands to execute when executeCommand(Stack) is called
+     * @param cmdToExecute the array of commands to execute. Can be null or empty.
+     */
     public void setCommandsForExecution(Command[] cmdToExecute){
         this.cmdToExecute = cmdToExecute;
     }
+
+    /**
+     * Executes all commands in command array in sequence
+     * @param history stack used to store successfully executed commands,ref for undo operations
+     */
     public void executeCommand(Stack<Command> history){
         for(Command cmd : cmdToExecute){
             boolean cmdSuccess = false;
