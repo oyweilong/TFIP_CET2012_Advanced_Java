@@ -35,14 +35,16 @@ public class Driver {
 //        undo(r, history);
 //        list(r);
 
-        add (r, "First_name Last_name Email");
-        add (r, "John Doe simple@example.com");
-        delete(r, "010");
-        add (r, "Hanna Moon tetter.tots@potatoesarelife.com");
-        add (r, "Ah Boon green-tea@teaforlife.com");
+        add (r, "F12#%@%32sname---- Last_name --Email");
+        add (r, "John Doe __3-2- simple@example.com");
+        delete(r, "ewrw e23");
+        add (r, "ds fsdf sd");
+        add (r, "32r 32 sadrg sdg fsg -tea@teaforlife.com");
         list(r);
-        update(r, "2 .");
+        update(r, "2   #@*#&$  3242         .#@$234#@_24 324324 ");
         list(r);
+        undo(r, history);
+
 //        update(r, "1 blue bell ice-cream@alaskaFields.org");
 //        list(r);
 //        delete(r, "1ad");
