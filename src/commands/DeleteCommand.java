@@ -12,6 +12,10 @@ public class DeleteCommand implements Command {
     private int index;
     private final Receiver receiver;
     private String[] deletedPayload;
+
+    /**
+     * boolean to record if command is undoable, true for Delete Command
+     */
     public boolean isUndoable = true;
     // ===== CONSTRUCTORS =====
 

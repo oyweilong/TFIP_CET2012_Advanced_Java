@@ -13,7 +13,11 @@ public class AddCommand implements Command {
     private final Receiver receiver;
     private final String[] payload; // string array of original payload
     private final String[] validatedPayload = new String[3]; // email validated payload string array
-    public boolean isUndoable = true; // boolean to record if command is undoable
+
+    /**
+     * boolean to record if command is undoable, true for Add Command
+     */
+    public boolean isUndoable = true;
 
     // ===== CONSTRUCTORS =====
     /**

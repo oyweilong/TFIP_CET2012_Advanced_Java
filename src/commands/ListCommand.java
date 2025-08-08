@@ -10,6 +10,10 @@ import exceptions.CustomException;
 public class ListCommand implements Command {
     // ===== FIELDS =====
     private final Receiver receiver;
+
+    /**
+     * boolean to record if command is undoable, false for List Command
+     */
     public boolean isUndoable = false;
 
     // ===== CONSTRUCTORS =====

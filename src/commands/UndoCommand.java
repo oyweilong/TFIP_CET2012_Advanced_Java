@@ -12,6 +12,10 @@ public class UndoCommand implements Command {
     // ===== FIELDS =====
     private final Receiver receiver;
     private Stack<Command> history;
+
+    /**
+     * boolean to record if command is undoable, false for Undo Command
+     */
     public boolean isUndoable = false;
 
     // ===== CONSTRUCTORS =====

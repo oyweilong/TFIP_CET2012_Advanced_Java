@@ -16,6 +16,10 @@ public class UpdateCommand implements Command {
     private final String[] unvalidatedPayload; // payload without index, unvalidated
     private String[] originalPayload; //
     private final String[] validatedPayload; // payload without index, validated
+
+    /**
+     * boolean to record if command is undoable, true for Update Command
+     */
     public boolean isUndoable = true;
 
     // ===== CONSTRUCTORS =====
