@@ -5,6 +5,9 @@ import exceptions.CustomException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Concrete Command Class to implement Add Command
+ */
 public class UpdateCommand implements Command {
     private final Receiver receiver;
     private final int index;
@@ -13,6 +16,11 @@ public class UpdateCommand implements Command {
     private final String[] validatedPayload; // payload without index, validated
     public boolean isUndoable = true;
 
+    /**
+     *
+     * @param receiver
+     * @param payload
+     */
     public UpdateCommand(Receiver receiver, String payload) {
         this.receiver = receiver;
         String[] choppedPayload = this.parsePayload(payload);
