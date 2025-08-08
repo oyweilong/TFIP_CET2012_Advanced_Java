@@ -9,21 +9,19 @@ import java.util.regex.Pattern;
 public class UpdateCommand implements Command {
     private final Receiver receiver;
     private final int index;
-    private final String[] payload;
+    private final String[] unvalidatedPayload;
     private String[] originalPayload;
     private final String[] validatedPayload;
     public boolean isUndoable = true;
 
-
-    // TODO For System.arraycopy, should we rename dest, rather than using payload again??
     public UpdateCommand(Receiver receiver, String payload)
     {
         this.receiver = receiver;
         String[] choppedPayload = this.parsePayload(payload);
-        this.payload = new String[choppedPayload.length-1];
-        System.arraycopy(choppedPayload, 1, this.payload, 0, choppedPayload.length-1);
+        unvalidatedPayload = new String[choppedPayload.length-1];
+        System.arraycopy(choppedPayload, 1, unvalidatedPayload, 0, choppedPayload.length-1);
         this.index = Integer.parseInt(choppedPayload[0]) - 1;
-        this.validatedPayload = new String[this.payload.length];
+        this.validatedPayload = new String[unvalidatedPayload.length];
     }
 
     // Validation for UPDATE command
@@ -74,7 +72,7 @@ public class UpdateCommand implements Command {
     public boolean execute() throws RuntimeException{
         try{
             originalPayload = receiver.tempDatastore.get(index);
-            validateAndExecute(payload);
+            validateAndExecute(unvalidatedPayload);
             receiver.updateEntry(index, validatedPayload, originalPayload);
             System.out.println("update");
             return true;
