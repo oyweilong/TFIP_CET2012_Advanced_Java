@@ -41,11 +41,12 @@ public class AddCommand implements Command {
                     "Example: add John Doe john@example.com");
         }
 
+        // Sort data items into array for processing
         validatedPayload[0] = toTitlecase(payloadArr[0]);
         validatedPayload[1] = toTitlecase(payloadArr[1]);
 
-        Pattern p1 = Pattern.compile("@+");
-        Pattern p2 = Pattern.compile("\\w+");
+        Pattern p1 = Pattern.compile("@+"); // // check for email address using '@' char
+        Pattern p2 = Pattern.compile("\\w+"); // check for alphanumeric
         Matcher m1 = p1.matcher(payloadArr[2]);
         Matcher m2 = p2.matcher(payloadArr[2]);
         if (m1.find()){
@@ -57,14 +58,23 @@ public class AddCommand implements Command {
             if (!m3.matches()) {
                 throw new CustomException("Invalid email format");
             }
+            // if email address is valid, assign to index <data3>
             else validatedPayload[2] = payloadArr[2];
-        } else if (m2.matches()){
+        }
+        // if alphanumeric is valid, assign to index <data3>
+        else if (m2.matches()){
             validatedPayload[2] = toTitlecase(payloadArr[2]);
         }
+        // if neither email address nor alphanumeric
         else
             throw new CustomException("Invalid email format");
     }
 
+    /**
+     * Execution method for Add Command
+     * @return true if payload validation and addition is successful
+     * @throws CustomException if validation or addition is unsuccessful
+     */
     @Override
     public boolean execute() throws CustomException{
         validateAndExecute(payload);
@@ -73,11 +83,18 @@ public class AddCommand implements Command {
         return true;
     }
 
+    /**
+     * Undo method for Add, to undo addition using delete method
+     */
    @Override
     public void undo(){
         receiver.deleteEntry(receiver.tempDatastore.size()-1);
     }
 
+    /**
+     * Method to state that Add Command is undoable
+     * @return true that Add Command can undo
+     */
     @Override
     public boolean checkUndoable(){
         return isUndoable;

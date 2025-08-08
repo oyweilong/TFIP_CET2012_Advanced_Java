@@ -2,20 +2,18 @@ package commands;
 
 import data.Receiver;
 import exceptions.CustomException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UpdateCommand implements Command {
     private final Receiver receiver;
     private final int index;
-    private final String[] unvalidatedPayload;
-    private String[] originalPayload;
-    private final String[] validatedPayload;
+    private final String[] unvalidatedPayload; // payload without index, unvalidated
+    private String[] originalPayload; //
+    private final String[] validatedPayload; // payload without index, validated
     public boolean isUndoable = true;
 
-    public UpdateCommand(Receiver receiver, String payload)
-    {
+    public UpdateCommand(Receiver receiver, String payload) {
         this.receiver = receiver;
         String[] choppedPayload = this.parsePayload(payload);
         unvalidatedPayload = new String[choppedPayload.length-1];
@@ -48,8 +46,8 @@ public class UpdateCommand implements Command {
         }
         //Layer 2: Email validation
         if (payloadArr.length == 3) {
-            Pattern p1 = Pattern.compile("@+");
-            Pattern p2 = Pattern.compile("\\w+");
+            Pattern p1 = Pattern.compile("@+"); // check for email address using '@' char
+            Pattern p2 = Pattern.compile("\\w+"); // check for alphanumeric
             Matcher m1 = p1.matcher(payloadArr[2]);
             Matcher m2 = p2.matcher(payloadArr[2]);
             if (m1.find()){
@@ -60,10 +58,14 @@ public class UpdateCommand implements Command {
                 if (!m3.matches()) {
                     throw new CustomException("Invalid email format");
                 }
+                // if email address is valid, assign to index <data3>
                 else validatedPayload[2] = payloadArr[2];
-            } else if (m2.matches()){
+            }
+            // if alphanumeric is valid, assign to index <data3>
+            else if (m2.matches()){
                 validatedPayload[2] = toTitlecase(payloadArr[2]);
             }
+            // if neither email address nor alphanumeric
             else
                 throw new CustomException("Invalid email format");
         }
