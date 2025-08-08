@@ -19,6 +19,10 @@ public class Receiver {
     public ArrayList<String[]> tempDatastore = new ArrayList<>();
     public static String FILE_PATH = "src/dataStore.txt";
 
+    public Receiver(){
+        loadFromFile();
+    }
+
     /**
      *  Default method to Add New Entry, also used for .undo() in
      *  DeleteCommand() & UpdateCommand()

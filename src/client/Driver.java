@@ -35,9 +35,9 @@ public class Driver {
 //        undo(r, history);
 //        list(r);
 
-        add (r, "First_name Last_name #$$%%#");
+        add (r, "First_name Last_name Email");
         add (r, "John Doe simple@example.com");
-        delete(r, "wqdwqd2");
+        delete(r, "010");
         add (r, "Hanna Moon tetter.tots@potatoesarelife.com");
         add (r, "Ah Boon green-tea@teaforlife.com");
         list(r);
@@ -50,7 +50,6 @@ public class Driver {
 //        undo(r, history);
 //        list(r);
 
-        r.loadFromFile();
         invoker.setCommandsForExecution(Driver.cmdArr);
         invoker.executeCommand(history);
         r.storeToFile();
