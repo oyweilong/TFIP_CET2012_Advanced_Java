@@ -4,9 +4,9 @@ import exceptions.CustomException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
+import java.nio.file.Files; // ver. 1.7
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.ArrayList; // ver. 1.2, updated 21
 import java.util.Arrays;
 import java.util.List;
 
@@ -73,6 +73,8 @@ public class Receiver {
     public void list(){
         System.out.println("List");
         for (String[] entry : tempDatastore) {
+            // Format index to have at least 2 digits, padding with leading zeros.
+            // Using %0Nd, where N is minimum number of digits, i.e. N =2
             System.out.printf("%02d. ", tempDatastore.indexOf(entry) + 1);
             for (String s : entry) {
                 System.out.printf("%s ", s);

@@ -14,6 +14,8 @@ public class UpdateCommand implements Command {
     private final String[] validatedPayload;
     public boolean isUndoable = true;
 
+
+    // TODO For System.arraycopy, should we rename dest, rather than using payload again??
     public UpdateCommand(Receiver receiver, String payload)
     {
         this.receiver = receiver;
@@ -29,10 +31,12 @@ public class UpdateCommand implements Command {
         // Layer 1: Check the number of payloads
         if (payloadArr.length ==0 || payloadArr.length > 3) {
             throw new CustomException("Invalid Update command. \n" +
-                    "Update command format: <firstName> <lastName> <email>,\n"+
-                    "<firstName> <lastName>,\n" +
-                    "<firstName>\n" +
-                    "Example: John Doe john@example.com");
+                    "Update command format: <index> <firstName> <lastName> <email>,\n"+
+                    "<index> <firstName> <lastName>,\n" +
+                    "<index> <firstName>\n" +
+                    "Example: 1 John Doe john@example.com");
+            // text block only compatible with Java 15 onwards
+            // program required backward compatibility up to Java 8
         }
         //set the first name and last name to Titlecase
         switch (payloadArr.length){
