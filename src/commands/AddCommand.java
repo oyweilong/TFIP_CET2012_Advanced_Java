@@ -2,8 +2,8 @@ package commands;
 
 import data.Receiver;
 import exceptions.CustomException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.Matcher; // ver. 1.4
+import java.util.regex.Pattern; // ver. 1.4
 
 /**
  * Concrete Command Class to implement Add Command
@@ -58,7 +58,8 @@ public class AddCommand implements Command {
                 throw new CustomException("Invalid email format");
             }
             else validatedPayload[2] = payloadArr[2];
-        } else if (m2.find()){
+        }
+        else if (m2.find()){
             validatedPayload[2] = toTitlecase(payloadArr[2]);
         }
         else
