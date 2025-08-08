@@ -59,7 +59,7 @@ public class UpdateCommand implements Command {
                     throw new CustomException("Invalid email format");
                 }
                 else validatedPayload[2] = payloadArr[2];
-            } else if (m2.find()){
+            } else if (m2.matches()){
                 validatedPayload[2] = toTitlecase(payloadArr[2]);
             }
             else
