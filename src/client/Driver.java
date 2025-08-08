@@ -83,7 +83,7 @@ public class Driver {
             // NegativeArraySizeException occurs if update index is " " due to parsePayload()
             // parsePayload() will return null for " " after .split(" ")
             // unvalidatedPayload = new String[choppedPayload.length-1] means
-            // unvalidatedPayload = new String[null-1] which becomes -1 array size, gives Exception
+            // unvalidatedPayload = new String[null-1], gives String[-1] hence NegativeArraySizeException
         }
     }
 
