@@ -19,6 +19,9 @@ public class Receiver {
     public ArrayList<String[]> tempDatastore = new ArrayList<>();
     public static String FILE_PATH = "src/dataStore.txt";
 
+    /**
+     * Constructor for receiver to load dataStore.txt file on startup
+     */
     public Receiver(){
         loadFromFile();
     }

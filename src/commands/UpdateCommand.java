@@ -11,7 +11,8 @@ import java.util.regex.Pattern;
 public class UpdateCommand implements Command {
     // ===== FIELDS =====
     private final Receiver receiver;
-    private final int index;
+    private String tempIndex;
+    private int index;
     private final String[] unvalidatedPayload; // payload without index, unvalidated
     private String[] originalPayload; //
     private final String[] validatedPayload; // payload without index, validated
@@ -25,12 +26,12 @@ public class UpdateCommand implements Command {
      */
     public UpdateCommand(Receiver receiver, String payload) {
         this.receiver = receiver;
-        String[] choppedPayload = this.parsePayload(payload);
+        String[] choppedPayload = parsePayload(payload);
         unvalidatedPayload = new String[choppedPayload.length-1];
         // NegativeArraySizeException if choppedPayload.length = 0, which result in String[-1]
         System.arraycopy(choppedPayload, 1, unvalidatedPayload, 0, choppedPayload.length-1);
-        this.index = Integer.parseInt(choppedPayload[0]) - 1;
-        this.validatedPayload = new String[unvalidatedPayload.length];
+        tempIndex = choppedPayload[0];
+        validatedPayload = new String[unvalidatedPayload.length];
     }
 
     /**
@@ -93,16 +94,23 @@ public class UpdateCommand implements Command {
      * @throws RuntimeException if update index is invalid or out of bounds.
      */
     @Override
-    public boolean execute() throws RuntimeException{
+    public boolean execute() throws IndexOutOfBoundsException,
+                                    NumberFormatException,
+                                    NegativeArraySizeException{
         try{
+            index = Integer.parseInt(tempIndex) - 1;
             originalPayload = receiver.tempDatastore.get(index);
             validateAndExecute(unvalidatedPayload);
             receiver.updateEntry(index, validatedPayload, originalPayload);
             System.out.println("update");
             return true;
-        } catch (IndexOutOfBoundsException|NumberFormatException e){
-            throw new CustomException("Update failed: Invalid index to update");
+        } catch (IndexOutOfBoundsException|NumberFormatException|NegativeArraySizeException e){
+            throw new CustomException("Invalid index to update");
         }
+        // NegativeArraySizeException occurs if update index is " " due to parsePayload()
+        // parsePayload() will return null for " " after .split(" ")
+        // unvalidatedPayload = new String[choppedPayload.length-1] means
+        // unvalidatedPayload = new String[null-1], gives String[-1] hence NegativeArraySizeException
     }
 
     /**

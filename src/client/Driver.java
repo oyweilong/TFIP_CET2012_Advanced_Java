@@ -35,9 +35,9 @@ public class Driver {
 //        undo(r, history);
 //        list(r);
 
-        add (r, "  ");
-        update(r, " ");
-        delete(r, "       j");
+        add (r, "a 2 3");
+        update(r, "l .09 2.04");
+        delete(r, "hj");
         list(r);
 //        add (r, "John Doe __3-2- simple@example.com");
 //        delete(r, "ewrw e23");
@@ -76,16 +76,8 @@ public class Driver {
      * @param payload input containing data items
      */
     public static void update(Receiver r, String payload){
-        try{
             UpdateCommand update = new UpdateCommand(r, payload);
             addToCmdArr(update);
-        } catch(NumberFormatException| NegativeArraySizeException e){
-            System.out.println("Invalid index for update");
-            // NegativeArraySizeException occurs if update index is " " due to parsePayload()
-            // parsePayload() will return null for " " after .split(" ")
-            // unvalidatedPayload = new String[choppedPayload.length-1] means
-            // unvalidatedPayload = new String[null-1], gives String[-1] hence NegativeArraySizeException
-        }
     }
 
     /**
@@ -94,12 +86,8 @@ public class Driver {
      * @param index input index to determine which line of data item to delete
      */
     public static void delete(Receiver r, String index){
-        try{
-            DeleteCommand delete = new DeleteCommand(r, index);
-            addToCmdArr(delete);
-        } catch(NumberFormatException e){
-            System.out.println("Invalid index for deletion");
-        }
+        DeleteCommand delete = new DeleteCommand(r, index);
+        addToCmdArr(delete);
     }
 
     /**

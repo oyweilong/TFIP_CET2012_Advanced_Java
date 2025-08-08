@@ -8,20 +8,22 @@ import exceptions.CustomException;
  */
 public class DeleteCommand implements Command {
     // ===== FIELDS =====
-    private final int index;
+    private String tempIndex;
+    private int index;
     private final Receiver receiver;
     private String[] deletedPayload;
     public boolean isUndoable = true;
     // ===== CONSTRUCTORS =====
 
     /**
-     *
+     * Constructor for Delete Command
      * @param receiver receiver instance to accept commands
      * @param index index of where the data is to be deleted
      */
     public DeleteCommand(Receiver receiver, String index){
         this.receiver = receiver;
-        this.index = Integer.parseInt(index)-1;
+        tempIndex = index;
+
     }
 
     /**
@@ -30,13 +32,14 @@ public class DeleteCommand implements Command {
      * @throws IndexOutOfBoundsException if the index given is invalid
      */
     @Override
-    public boolean execute() throws IndexOutOfBoundsException{
+    public boolean execute() throws IndexOutOfBoundsException,NumberFormatException{
         try{
+            index = Integer.parseInt(tempIndex)-1;
             deletedPayload = receiver.tempDatastore.get(index);
             System.out.println("Delete");
             receiver.deleteEntry(index);
             return true;
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException| NumberFormatException e){
             throw new CustomException("Invalid index for deletion");
         }
     }
