@@ -35,8 +35,9 @@ public class Driver {
 //        undo(r, history);
 //        list(r);
 
-        add (r, "First Last Email");
+        add (r, "  ");
         update(r, " ");
+        delete(r, "       j");
         list(r);
 //        add (r, "John Doe __3-2- simple@example.com");
 //        delete(r, "ewrw e23");
