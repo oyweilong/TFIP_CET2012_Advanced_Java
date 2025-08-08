@@ -1,13 +1,13 @@
 package exceptions;
 
 /**
- * Custom exception for application-specific errors
+ * Custom Exception for application-specific errors
  */
 public class CustomException extends RuntimeException {
 
     /**
-     *
-     * @param message
+     * Method for displaying Custom Exception message
+     * @param message specific messages to each Custom Exception
      */
     public CustomException(String message){
         super(message);

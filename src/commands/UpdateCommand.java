@@ -6,9 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Concrete Command Class to implement Add Command
+ * Concrete Command Class to implement Update Command
  */
 public class UpdateCommand implements Command {
+    // ===== FIELDS =====
     private final Receiver receiver;
     private final int index;
     private final String[] unvalidatedPayload; // payload without index, unvalidated
@@ -16,10 +17,11 @@ public class UpdateCommand implements Command {
     private final String[] validatedPayload; // payload without index, validated
     public boolean isUndoable = true;
 
+    // ===== CONSTRUCTORS =====
     /**
-     *
-     * @param receiver
-     * @param payload
+     * Constructor for Update Command
+     * @param receiver receiver instance to accept commands
+     * @param payload input containing data items
      */
     public UpdateCommand(Receiver receiver, String payload) {
         this.receiver = receiver;
@@ -31,6 +33,11 @@ public class UpdateCommand implements Command {
         this.validatedPayload = new String[unvalidatedPayload.length];
     }
 
+    /**
+     * Validation method for Update Command, checking number of data items and email format.
+     * @param payloadArr String array of original payload.
+     * @throws CustomException thrown if missing data items or invalid email format.
+     */
     // Validation for UPDATE command
     public void validateAndExecute(String[] payloadArr) throws CustomException {
         // Layer 1: Check the number of payloads
@@ -79,6 +86,12 @@ public class UpdateCommand implements Command {
                 throw new CustomException("Invalid email format");
         }
     }
+
+    /**
+     * Execution method for Update Command.
+     * @return true if payload validation and update is successful.
+     * @throws RuntimeException if update index is invalid or out of bounds.
+     */
     @Override
     public boolean execute() throws RuntimeException{
         try{
@@ -92,12 +105,19 @@ public class UpdateCommand implements Command {
         }
     }
 
+    /**
+     * Undo method for Update, to undo update of either delete or add entry
+     */
     @Override
     public void undo(){
         receiver.deleteEntry(index);
         receiver.addEntry(index, originalPayload);
     }
 
+    /**
+     * Method to state that Update Command is undoable
+     * @return true that Update Command can undo
+     */
     @Override
     public boolean checkUndoable(){
         return isUndoable;

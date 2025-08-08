@@ -71,9 +71,9 @@ public class AddCommand implements Command {
     }
 
     /**
-     * Execution method for Add Command
-     * @return true if payload validation and addition is successful
-     * @throws CustomException if validation or addition is unsuccessful
+     * Execution method for Add Command.
+     * @return true if payload validation and addition is successful.
+     * @throws CustomException if validation or addition is unsuccessful.
      */
     @Override
     public boolean execute() throws CustomException{
