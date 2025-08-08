@@ -92,8 +92,8 @@ public class AddCommand implements Command {
     }
 
     /**
-     * Method to state that Add Command is undoable
-     * @return true that Add Command can undo
+     * Getter method for an undoable flag for Add Command
+     * @return isUndoable field
      */
     @Override
     public boolean checkUndoable(){
