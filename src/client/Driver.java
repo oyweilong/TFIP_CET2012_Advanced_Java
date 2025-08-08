@@ -10,6 +10,9 @@ import java.util.Stack;
  * Creates and configures command objects, passing command parameters.
  */
 public class Driver {
+    /**
+     * Count for number of commands initialized by client
+     */
     public static int cmdCount = 0;
     static Command[] cmdArr= new Command[1];
 
@@ -83,7 +86,7 @@ public class Driver {
     /**
      * Method to create and configure Undo Command
      * @param r receiver instance to accept commands
-     * @param history record of Stack<Command> to track which command to undo
+     * @param history record of Command stack to track which command to undo
      */
     public static void undo(Receiver r, Stack<Command> history){
         UndoCommand undo = new UndoCommand(r, history);

@@ -24,7 +24,7 @@ public class ListCommand implements Command {
     /**
      * Execution method for List Command
      * @return false by default to prevent insertion into history Stack
-     * @throws CustomException
+     * @throws CustomException if the temp data store is empty
      */
     @Override
     public boolean execute() throws CustomException {
