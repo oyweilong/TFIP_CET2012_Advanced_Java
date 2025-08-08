@@ -35,15 +35,17 @@ public class Driver {
 //        undo(r, history);
 //        list(r);
 
-        add (r, "F12#%@%32sname---- Last_name --Email");
-        add (r, "John Doe __3-2- simple@example.com");
-        delete(r, "ewrw e23");
-        add (r, "ds fsdf sd");
-        add (r, "32r 32 sadrg sdg fsg -tea@teaforlife.com");
+        add (r, "First Last Email");
+        update(r, " ");
         list(r);
-        update(r, "2   #@*#&$  3242         .#@$234#@_24 324324 ");
-        list(r);
-        undo(r, history);
+//        add (r, "John Doe __3-2- simple@example.com");
+//        delete(r, "ewrw e23");
+//        add (r, "ds fsdf sd");
+//        add (r, "32r 32 sadrg sdg fsg -tea@teaforlife.com");
+//        list(r);
+//        update(r, "2   #@*#&$  3242         .#@$234#@_24 324324 ");
+//        list(r);
+//        undo(r, history);
 
 //        update(r, "1 blue bell ice-cream@alaskaFields.org");
 //        list(r);
@@ -76,7 +78,7 @@ public class Driver {
         try{
             UpdateCommand update = new UpdateCommand(r, payload);
             addToCmdArr(update);
-        } catch(NumberFormatException e){
+        } catch(NumberFormatException| NegativeArraySizeException e){
             System.out.println("Invalid index for update");
         }
     }

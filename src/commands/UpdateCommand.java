@@ -78,7 +78,7 @@ public class UpdateCommand implements Command {
             receiver.updateEntry(index, validatedPayload, originalPayload);
             System.out.println("update");
             return true;
-        } catch (IndexOutOfBoundsException|NumberFormatException|NegativeArraySizeException e){
+        } catch (IndexOutOfBoundsException|NumberFormatException e){
             throw new CustomException("Update failed: Invalid index to update");
         }
     }
