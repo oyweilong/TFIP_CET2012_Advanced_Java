@@ -16,7 +16,14 @@ import java.util.List;
  * FIlE_PATH to store Relative Path for storing and loading dataStore text file
  */
 public class Receiver {
+    /**
+     * Temporary data store for reading and writing before interfacing with
+     * dataStore.txt
+     */
     public ArrayList<String[]> tempDatastore = new ArrayList<>();
+    /**
+     * File path for dataStore to be saved
+     */
     public static String FILE_PATH = "src/dataStore.txt";
 
     /**
@@ -28,7 +35,7 @@ public class Receiver {
 
     /**
      *  Default method to Add New Entry, also used for .undo() in
-     *  DeleteCommand() & UpdateCommand()
+     *  DeleteCommand() and UpdateCommand()
      * @param index for referencing to which specific data items to undo
      * @param payload input containing data items
      */
