@@ -23,37 +23,18 @@ public class Driver {
        Stack<Command> history = new Stack<>();
 
        //Client execution
-
-//        add(r, "Jane Lai .jane_lai@gmail.com");
-//        add(r, "King koNg king__.kong@gmail.com");
-//        add(r, "Sam peReZ _.sam-perez._@gmail.com");
-//        update(r, "1","Gary lim garysim@gmail.com");
-//        list(r);
-//        delete(r, "5");
-//        Command cmd = new ListCommand(r);
-//        history.push(cmd);
-//        undo(r, history);
-//        list(r);
-
-        add (r, "a 2 3");
-        update(r, "l .09 2.04");
-        delete(r, "hj");
+        add (r, "First_name Last_name Email");
+        add (r, "John Doe simple@example.com");
+        add (r, "Hanna Moon tetter.tots@potatoesarelife.com");
+        add (r, "Ah Boon green-tea@teaforlife.com");
         list(r);
-//        add (r, "John Doe __3-2- simple@example.com");
-//        delete(r, "ewrw e23");
-//        add (r, "ds fsdf sd");
-//        add (r, "32r 32 sadrg sdg fsg -tea@teaforlife.com");
-//        list(r);
-//        update(r, "2   #@*#&$  3242         .#@$234#@_24 324324 ");
-//        list(r);
-//        undo(r, history);
-
-//        update(r, "1 blue bell ice-cream@alaskaFields.org");
-//        list(r);
-//        delete(r, "1ad");
-//        list(r);
-//        undo(r, history);
-//        list(r);
+        update(r, "3 Adam");
+        update(r, "1 blue bell ice-cream@alaskaFields.org");
+        list(r);
+        delete(r, "1");
+        list(r);
+        undo(r, history);
+        list(r);
 
         invoker.setCommandsForExecution(Driver.cmdArr);
         invoker.executeCommand(history);

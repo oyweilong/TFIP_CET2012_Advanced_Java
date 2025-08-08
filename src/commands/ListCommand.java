@@ -4,7 +4,7 @@ import data.Receiver;
 import exceptions.CustomException;
 
 /**
- * Concrete Command Class to implement Add Command
+ * Concrete Command Class to implement List Command
  */
 
 public class ListCommand implements Command {
