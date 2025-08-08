@@ -80,6 +80,10 @@ public class Driver {
             addToCmdArr(update);
         } catch(NumberFormatException| NegativeArraySizeException e){
             System.out.println("Invalid index for update");
+            // NegativeArraySizeException occurs if update index is " " due to parsePayload()
+            // parsePayload() will return null for " " after .split(" ")
+            // unvalidatedPayload = new String[choppedPayload.length-1] means
+            // unvalidatedPayload = new String[null-1] which becomes -1 array size, gives Exception
         }
     }
 

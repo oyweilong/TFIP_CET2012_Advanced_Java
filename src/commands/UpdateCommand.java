@@ -17,6 +17,7 @@ public class UpdateCommand implements Command {
         this.receiver = receiver;
         String[] choppedPayload = this.parsePayload(payload);
         unvalidatedPayload = new String[choppedPayload.length-1];
+        // NegativeArraySizeException if choppedPayload.length = 0, which result in String[-1]
         System.arraycopy(choppedPayload, 1, unvalidatedPayload, 0, choppedPayload.length-1);
         this.index = Integer.parseInt(choppedPayload[0]) - 1;
         this.validatedPayload = new String[unvalidatedPayload.length];

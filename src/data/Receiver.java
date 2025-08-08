@@ -119,7 +119,7 @@ public class Receiver {
             if (!Files.exists(Paths.get(FILE_PATH))) {
                 return;
             }
-            tempDatastore.clear(); // to clear or not?
+            tempDatastore.clear(); // clear existing payload memory
             List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
             for (String line : lines) {
                 // Split by space into 3 parts

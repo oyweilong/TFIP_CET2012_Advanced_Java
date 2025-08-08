@@ -30,6 +30,7 @@ public interface Command {
      */
     default String[] parsePayload(String payload){
         String[] payloadArr = payload.split(" ");
+        // .split(" ") will return null if payload only contains " "
         for (int i = 0; i < payloadArr.length; i++) {
             payloadArr[i] = payloadArr[i].trim();
         }
